@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SerenityQ | Intelligent Mental Health Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-brain"></i>
+                    SerenityQ
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#psychologists">Psychologists</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li class="auth-links">
+                        <a href="#" class="btn btn-outline btn-sm" id="login-btn">Login</a>
+                        <a href="#" class="btn btn-primary btn-sm" id="signup-btn">Sign Up</a>
+                    </li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                    <div class="mobile-auth">
+                        <a href="#" class="btn btn-outline btn-sm" id="mobile-login">Login</a>
+                        <a href="#" class="btn btn-primary btn-sm" id="mobile-signup">Sign Up</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Login to SerenityQ</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <p class="form-footer">Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Create Your Account</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+                <p class="form-footer">Already have an account? <a href="#" id="show-login">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Intelligent Mental Health Support When You Need It</h1>
+                    <p>SerenityQ matches you with the perfect psychologist using AI technology. Describe how you feel and we'll connect you with the best professional for your needs.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary">Find Your Psychologist</a>
+                        <a href="#" class="btn btn-outline">How It Works</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="images/logo.png" alt="Therapy session">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Why Choose SerenityQ</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Matching</h3>
+                    <p>Our intelligent system analyzes your needs and matches you with the most suitable psychologist based on your specific situation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Instant Connection</h3>
+                    <p>Priority matching with online psychologists for immediate support when you need it most.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Integrated Chat</h3>
+                    <p>Seamless communication with your psychologist through our secure messaging platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2>How SerenityQ Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Describe Your Feelings</h3>
+                    <p>Chat with our AI assistant and describe what you're experiencing in your own words.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Get Matched</h3>
+                    <p>Our system analyzes your needs and suggests the best psychologists for your situation.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Book & Connect</h3>
+                    <p>Schedule an appointment and start your session through video, phone, or chat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Psychologists Section -->
+    <section class="psychologists" id="psychologists">
+        <div class="container">
+            <h2>Our Trusted Psychologists</h2>
+            <div class="therapists-grid">
+                <div class="therapist-card">
+                    <div class="therapist-image" style="background-image: url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="therapist-info">
+                        <h3>Dr. Sarah Johnson</h3>
+                        <span class="therapist-specialty">Anxiety & Depression</span>
+                        <span class="therapist-status status-online">Online Now</span>
+                    </div>
+                </div>
+                <div class="therapist-card">
+                    <div class="therapist-image" style="background-image: url('https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="therapist-info">
+                        <h3>Dr. Michael Chen</h3>
+                        <span class="therapist-specialty">Relationship Counseling</span>
+                        <span class="therapist-status status-online">Online Now</span>
+                    </div>
+                </div>
+                <div class="therapist-card">
+                    <div class="therapist-image" style="background-image: url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="therapist-info">
+                        <h3>Dr. Amina Rodriguez</h3>
+                        <span class="therapist-specialty">Trauma & PTSD</span>
+                        <span class="therapist-status status-offline">Offline</span>
+                    </div>
+                </div>
+                <div class="therapist-card">
+                    <div class="therapist-image" style="background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="therapist-info">
+                        <h3>Dr. James Wilson</h3>
+                        <span class="therapist-specialty">Child Psychology</span>
+                        <span class="therapist-status status-online">Online Now</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Start Your Mental Health Journey?</h2>
+            <p>SerenityQ makes it easy to find the right support for your unique needs. Our AI matching system ensures you connect with the perfect psychologist.</p>
+            <a href="#" class="btn btn-secondary">Get Matched Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SerenityQ</h3>
+                    <p>Intelligent appointment booking system for effective mental health support.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#psychologists">Psychologists</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> support@serenityq.com</li>
+                        <li><i class="fas fa-phone"></i> (123) 456-7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Wellness St, Mindville</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 SerenityQ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
