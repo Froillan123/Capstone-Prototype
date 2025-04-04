@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<link rel="stylesheet" href="css/userdashboard.css">
+<body>
+
+ <!-- Sidebar -->
+ <div class="sidebar">
+    <div class="logo">SQ</div>
+    <div class="sidebar-item active">
+        <i class="fas fa-home"></i>
+        <span>Dashboard</span>
+    </div>
+    <div class="sidebar-item">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Appointments</span>
+    </div>
+    <div class="sidebar-item">
+        <i class="fas fa-user-md"></i>
+        <span>Therapists</span>
+    </div>
+    <div class="sidebar-item">
+        <i class="fas fa-comments"></i>
+        <span>Messages</span>
+    </div>
+    <div class="sidebar-item">
+        <i class="fas fa-cog"></i>
+        <span>Settings</span>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="header">
+        <div class="header-title">Dashboard</div>
+        <div class="user-profile" id="userProfile">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
+            <span class="user-name">Sarah Johnson</span>
+            <i class="fas fa-chevron-down"></i>
+            
+            <!-- Profile Dropdown -->
+            <div class="profile-dropdown" id="profileDropdown">
+                <div class="dropdown-item">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </div>
+                <div class="dropdown-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log Out</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="welcome-card">
+            <h1>Welcome back, Sarah!</h1>
+            <p>How are you feeling today? Remember, taking care of your mental health is just as important as physical health.</p>
+            <button class="btn btn-primary" id="bookSessionBtn">Book a Session</button>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3><i class="fas fa-calendar-check"></i> Upcoming Appointments</h3>
+                <p>2</p>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 60%"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <h3><i class="fas fa-check-circle"></i> Completed Sessions</h3>
+                <p>8</p>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 80%"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <h3><i class="fas fa-heartbeat"></i> Wellness Score</h3>
+                <p>76/100</p>
+                <div class="progress">
+                    <div class="progress-bar" style="width: 76%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="active-users">
+            <h2><i class="fas fa-users"></i> Active Therapists</h2>
+            <div class="users-list">
+                <div class="user-card">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Therapist">
+                    <div class="user-info">
+                        <span class="name">Dr. Emily Parker</span>
+                        <span class="status"><span class="status-dot"></span> Online</span>
+                    </div>
+                </div>
+                <div class="user-card">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Therapist">
+                    <div class="user-info">
+                        <span class="name">Dr. Michael Chen</span>
+                        <span class="status"><span class="status-dot"></span> Online</span>
+                    </div>
+                </div>
+                <div class="user-card">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Therapist">
+                    <div class="user-info">
+                        <span class="name">Dr. Sarah Johnson</span>
+                        <span class="status"><span class="status-dot away"></span> Away</span>
+                    </div>
+                </div>
+                <div class="user-card">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Therapist">
+                    <div class="user-info">
+                        <span class="name">Dr. Robert Davis</span>
+                        <span class="status"><span class="status-dot"></span> Online</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <h3><i class="fas fa-clock"></i> Recent Activity</h3>
+            <p>Your last session was 5 days ago with Dr. Emily Parker</p>
+            <div class="progress">
+                <div class="progress-bar" style="width: 45%"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Book Session Modal -->
+<div class="modal" id="bookSessionModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Book a Therapy Session</h3>
+            <button class="close-modal" id="closeBookModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="therapist">Select Therapist</label>
+                <select id="therapist">
+                    <option value="">-- Select a therapist --</option>
+                    <option value="emily">Dr. Emily Parker (Cognitive Behavioral Therapy)</option>
+                    <option value="michael">Dr. Michael Chen (Psychodynamic Therapy)</option>
+                    <option value="sarah">Dr. Sarah Johnson (Dialectical Behavior Therapy)</option>
+                    <option value="robert">Dr. Robert Davis (Humanistic Therapy)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="sessionDate">Session Date</label>
+                <input type="date" id="sessionDate">
+            </div>
+            <div class="form-group">
+                <label for="sessionTime">Session Time</label>
+                <input type="time" id="sessionTime">
+            </div>
+            <div class="form-group">
+                <label for="sessionNotes">Notes (Optional)</label>
+                <textarea id="sessionNotes" placeholder="Any specific concerns or topics you'd like to discuss..."></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" id="cancelBookSession">Cancel</button>
+            <button class="btn btn-primary">Confirm Booking</button>
+        </div>
+    </div>
+</div>
+
+<!-- Chat Icon -->
+<div class="chat-icon" id="chatIcon">
+    <i class="fas fa-comment-dots"></i>
+</div>
+
+<!-- Chat Container -->
+<div class="chat-container" id="chatContainer">
+    <div class="chat-header">
+        <h3>SerenityQ Bot</h3>
+        <button class="close-chat" id="closeChat">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot">
+            <div class="message-content">
+                Hello! I'm SerenityQ, your mental health assistant. How can I help you today?
+            </div>
+            <div class="message-time">2:45 PM</div>
+        </div>
+        <div class="message user">
+            <div class="message-content">
+                Hi! I'd like to book an appointment with a therapist.
+            </div>
+            <div class="message-time">2:46 PM</div>
+        </div>
+        <div class="message bot">
+            <div class="message-content">
+                I can help with that. Would you prefer a male or female therapist?
+            </div>
+            <div class="message-time">2:46 PM</div>
+        </div>
+        <div class="message bot">
+            <div class="message-content">
+                Also, do you have any specific therapy approach in mind (CBT, DBT, Psychodynamic, etc.)?
+            </div>
+            <div class="message-time">2:47 PM</div>
+        </div>
+    </div>
+    <div class="chat-input">
+        <input type="text" placeholder="Type your message..." id="chatInput">
+        <button id="sendMessage">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
+
+    <script src="js/userdashboard.js"></script>
+</body>
+</html>
+
