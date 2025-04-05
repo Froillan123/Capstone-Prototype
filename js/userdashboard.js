@@ -1,151 +1,181 @@
-  // Toggle chat interface
-  const chatIcon = document.getElementById('chatIcon');
-  const chatContainer = document.getElementById('chatContainer');
-  const closeChat = document.getElementById('closeChat');
-
-  chatIcon.addEventListener('click', () => {
-      chatContainer.classList.add('active');
-      chatIcon.classList.add('hidden');
-  });
-
-  closeChat.addEventListener('click', () => {
-      chatContainer.classList.remove('active');
-      chatIcon.classList.remove('hidden');
-  });
-
-  // Send message functionality
-  const chatInput = document.getElementById('chatInput');
-  const sendMessage = document.getElementById('sendMessage');
-  const chatMessages = document.getElementById('chatMessages');
-
-  function sendUserMessage() {
-      const messageText = chatInput.value.trim();
-      if (messageText) {
-          // Add user message
-          const userMessage = document.createElement('div');
-          userMessage.className = 'message user';
-          userMessage.innerHTML = `
-              <div class="message-content">${messageText}</div>
-              <div class="message-time">${getCurrentTime()}</div>
-          `;
-          chatMessages.appendChild(userMessage);
-          
-          // Clear input
-          chatInput.value = '';
-          
-          // Scroll to bottom
-          chatMessages.scrollTop = chatMessages.scrollHeight;
-          
-          // Simulate bot response after a delay
-          setTimeout(sendBotResponse, 1000);
-      }
-  }
-
-  function sendBotResponse() {
-      const responses = [
-          "I understand. Would you like me to show you available therapists?",
-          "Your mental health is important. Let me help you find the right support.",
-          "I can see you're taking positive steps. Would you like to schedule a session?",
-          "Based on your preferences, I recommend Dr. Smith who specializes in CBT.",
-          "Remember, it's okay to ask for help. I'm here to support you."
-      ];
-      
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      
-      const botMessage = document.createElement('div');
-      botMessage.className = 'message bot';
-      botMessage.innerHTML = `
-          <div class="message-content">${randomResponse}</div>
-          <div class="message-time">${getCurrentTime()}</div>
-      `;
-      chatMessages.appendChild(botMessage);
-      
-      // Scroll to bottom
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  function getCurrentTime() {
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12;
-      hours = hours ? hours : 12; // the hour '0' should be '12'
-      return `${hours}:${minutes} ${ampm}`;
-  }
-
-  // Send message on button click or Enter key
-  sendMessage.addEventListener('click', sendUserMessage);
-  chatInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-          sendUserMessage();
-      }
-  });
-
-  // Toggle sidebar expansion (for demonstration)
-  const sidebar = document.querySelector('.sidebar');
-  const sidebarItems = document.querySelectorAll('.sidebar-item');
-
-  sidebar.addEventListener('click', () => {
-      sidebar.classList.toggle('expanded');
-  });
-
-  // Set active sidebar item
-  sidebarItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-          e.stopPropagation();
-          sidebarItems.forEach(i => i.classList.remove('active'));
-          item.classList.add('active');
-      });
-  });
-
-  // Profile dropdown toggle
-  const userProfile = document.getElementById('userProfile');
-  const profileDropdown = document.getElementById('profileDropdown');
-
-  userProfile.addEventListener('click', (e) => {
-      e.stopPropagation();
-      profileDropdown.classList.toggle('active');
-  });
-
-  // Close dropdown when clicking outside
-  document.addEventListener('click', () => {
-      profileDropdown.classList.remove('active');
-  });
-
-  // Book session modal
-  const bookSessionBtn = document.getElementById('bookSessionBtn');
-  const bookSessionModal = document.getElementById('bookSessionModal');
-  const closeBookModal = document.getElementById('closeBookModal');
-  const cancelBookSession = document.getElementById('cancelBookSession');
-
-  bookSessionBtn.addEventListener('click', () => {
-      bookSessionModal.classList.add('active');
-  });
-
-  closeBookModal.addEventListener('click', () => {
-      bookSessionModal.classList.remove('active');
-  });
-
-  cancelBookSession.addEventListener('click', () => {
-      bookSessionModal.classList.remove('active');
-  });
-
-  // Close modal when clicking outside
-  bookSessionModal.addEventListener('click', (e) => {
-      if (e.target === bookSessionModal) {
-          bookSessionModal.classList.remove('active');
-      }
-  });
-
-  // Initialize progress bars animation
-  document.addEventListener('DOMContentLoaded', () => {
-      const progressBars = document.querySelectorAll('.progress-bar');
-      progressBars.forEach(bar => {
-          const width = bar.style.width;
-          bar.style.width = '0';
-          setTimeout(() => {
-              bar.style.width = width;
-          }, 100);
-      });
-  });
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+        
+        // Chatbot functionality
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotSend = document.getElementById('chatbotSend');
+        
+        chatbotToggle.addEventListener('click', () => {
+            chatbotContainer.classList.toggle('show');
+        });
+        
+        chatbotClose.addEventListener('click', () => {
+            chatbotContainer.classList.remove('show');
+        });
+        
+        chatbotSend.addEventListener('click', sendMessage);
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+        
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (message) {
+                // Add user message
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user-message';
+                userMessage.textContent = message;
+                chatbotMessages.appendChild(userMessage);
+                
+                // Clear input
+                chatbotInput.value = '';
+                
+                // Scroll to bottom
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                
+                // Simulate bot response after a delay
+                setTimeout(() => {
+                    const responses = [
+                        "I understand. How does that make you feel?",
+                        "That's interesting. Tell me more about that.",
+                        "Have you tried the breathing exercises we discussed last time?",
+                        "I can schedule an appointment with your therapist if you'd like.",
+                        "Remember to practice self-care. Would you like me to suggest some activities?",
+                        "I notice you've been consistent with your journaling. That's great progress!",
+                        "How about trying a 5-minute mindfulness exercise? I can guide you through it."
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    
+                    const botMessage = document.createElement('div');
+                    botMessage.className = 'message bot-message';
+                    botMessage.textContent = randomResponse;
+                    chatbotMessages.appendChild(botMessage);
+                    
+                    // Scroll to bottom
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }, 1000);
+            }
+        }
+        
+        // Mood Chart
+        const moodCtx = document.getElementById('moodChart').getContext('2d');
+        const moodChart = new Chart(moodCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Mood Level',
+                    data: [65, 59, 70, 72, 75, 80],
+                    backgroundColor: 'rgba(93, 95, 239, 0.1)',
+                    borderColor: 'rgba(93, 95, 239, 1)',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    fill: true,
+                    pointBackgroundColor: 'rgba(93, 95, 239, 1)',
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 50,
+                        max: 100,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleFont: {
+                            weight: 'bold'
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += context.raw + '/100';
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Session Type Chart
+        const sessionCtx = document.getElementById('sessionChart').getContext('2d');
+        const sessionChart = new Chart(sessionCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['CBT', 'Mindfulness', 'Evaluation', 'Support'],
+                datasets: [{
+                    data: [35, 25, 20, 20],
+                    backgroundColor: [
+                        'rgba(93, 95, 239, 0.8)',
+                        'rgba(255, 214, 102, 0.8)',
+                        'rgba(76, 175, 80, 0.8)',
+                        'rgba(255, 126, 95, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(93, 95, 239, 1)',
+                        'rgba(255, 214, 102, 1)',
+                        'rgba(76, 175, 80, 1)',
+                        'rgba(255, 126, 95, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Animate progress bars on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        });

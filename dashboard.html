@@ -3,226 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+    <title>SerenityQ : Intelligent Mental Health Support</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/userdashboard.css">
 </head>
-<link rel="stylesheet" href="css/userdashboard.css">
 <body>
-
- <!-- Sidebar -->
- <div class="sidebar">
-    <div class="logo">SQ</div>
-    <div class="sidebar-item active">
-        <i class="fas fa-home"></i>
-        <span>Dashboard</span>
-    </div>
-    <div class="sidebar-item">
-        <i class="fas fa-calendar-alt"></i>
-        <span>Appointments</span>
-    </div>
-    <div class="sidebar-item">
-        <i class="fas fa-user-md"></i>
-        <span>Therapists</span>
-    </div>
-    <div class="sidebar-item">
-        <i class="fas fa-comments"></i>
-        <span>Messages</span>
-    </div>
-    <div class="sidebar-item">
-        <i class="fas fa-cog"></i>
-        <span>Settings</span>
-    </div>
-</div>
-
-<!-- Main Content -->
-<div class="main-content">
-    <div class="header">
-        <div class="header-title">Dashboard</div>
-        <div class="user-profile" id="userProfile">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
-            <span class="user-name">Sarah Johnson</span>
-            <i class="fas fa-chevron-down"></i>
+    <!-- Header with Navigation -->
+    <header class="header">
+        <a href="#" class="logo">
+            <i class="fas fa-brain"></i>
+            SerenityQ
+        </a>
+        
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <nav class="navbar">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="nav-link active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+                <li><a href="#" class="nav-link"><i class="fas fa-user-md"></i> Therapists</a></li>
+                <li><a href="#" class="nav-link"><i class="fas fa-book"></i> Resources</a></li>
+                <li><a href="#" class="nav-link"><i class="fas fa-pen-fancy"></i> Journal</a></li>
+            </ul>
             
-            <!-- Profile Dropdown -->
-            <div class="profile-dropdown" id="profileDropdown">
-                <div class="dropdown-item">
-                    <i class="fas fa-user"></i>
-                    <span>My Profile</span>
-                </div>
-                <div class="dropdown-item">
-                    <i class="fas fa-cog"></i>
-                    <span>Settings</span>
-                </div>
-                <div class="dropdown-divider"></div>
-                <div class="dropdown-item">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Log Out</span>
+            <div class="profile">
+                <span class="profile-name">Sarah</span>
+                <img src="https://randomuser.me/api/portraits/women/45.jpg" class="profile-img" alt="Profile">
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
+                    <a href="#" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="#" class="dropdown-item"><i class="fas fa-bell"></i> Notifications</a>
+                    <div class="divider"></div>
+                    <a href="#" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
             </div>
-        </div>
-    </div>
+        </nav>
+    </header>
 
-    <div class="content">
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
         <div class="welcome-card">
-            <h1>Welcome back, Sarah!</h1>
-            <p>How are you feeling today? Remember, taking care of your mental health is just as important as physical health.</p>
-            <button class="btn btn-primary" id="bookSessionBtn">Book a Session</button>
+            <h2>Welcome back, Sarah! <span class="mood-emoji">😊</span></h2>
+            <p>How are you feeling today? Remember to take time for yourself.</p>
         </div>
 
-        <div class="stats-container">
+        <!-- Stats Section -->
+        <div class="stats-grid">
             <div class="stat-card">
-                <h3><i class="fas fa-calendar-check"></i> Upcoming Appointments</h3>
-                <p>2</p>
-                <div class="progress">
-                    <div class="progress-bar" style="width: 60%"></div>
+                <div class="stat-icon" style="background-color: rgba(93, 95, 239, 0.1); color: var(--primary);">
+                    <i class="fas fa-calendar-check"></i>
                 </div>
+                <div class="stat-value">12</div>
+                <div class="stat-title">Total Sessions</div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 70%; background-color: var(--primary);"></div>
+                </div>
+                <div class="progress-text">+2 from last month</div>
             </div>
+            
             <div class="stat-card">
-                <h3><i class="fas fa-check-circle"></i> Completed Sessions</h3>
-                <p>8</p>
-                <div class="progress">
-                    <div class="progress-bar" style="width: 80%"></div>
+                <div class="stat-icon" style="background-color: rgba(255, 214, 102, 0.1); color: var(--accent);">
+                    <i class="fas fa-clock"></i>
                 </div>
+                <div class="stat-value">3</div>
+                <div class="stat-title">Upcoming</div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 30%; background-color: var(--accent);"></div>
+                </div>
+                <div class="progress-text">1 new this week</div>
             </div>
+            
             <div class="stat-card">
-                <h3><i class="fas fa-heartbeat"></i> Wellness Score</h3>
-                <p>76/100</p>
-                <div class="progress">
-                    <div class="progress-bar" style="width: 76%"></div>
+                <div class="stat-icon" style="background-color: rgba(76, 175, 80, 0.1); color: var(--success);">
+                    <i class="fas fa-check-circle"></i>
                 </div>
+                <div class="stat-value">8</div>
+                <div class="stat-title">Completed</div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 80%; background-color: var(--success);"></div>
+                </div>
+                <div class="progress-text">Consistency: Excellent</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon" style="background-color: rgba(255, 126, 95, 0.1); color: var(--secondary);">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="stat-value">85%</div>
+                <div class="stat-title">Wellness Progress</div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 85%; background-color: var(--secondary);"></div>
+                </div>
+                <div class="progress-text">5% increase</div>
             </div>
         </div>
 
-        <div class="active-users">
-            <h2><i class="fas fa-users"></i> Active Therapists</h2>
-            <div class="users-list">
-                <div class="user-card">
-                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Therapist">
-                    <div class="user-info">
-                        <span class="name">Dr. Emily Parker</span>
-                        <span class="status"><span class="status-dot"></span> Online</span>
+        <!-- Main Content Grid -->
+        <div class="content-grid">
+            <!-- Left Column -->
+            <div class="left-column">
+                <div class="card">
+                    <h5 class="section-title"><i class="fas fa-calendar-alt"></i> Upcoming Appointments</h5>
+                    <div class="appointment-item">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="psychologist-img" alt="Dr. Michael Chen">
+                        <div class="appointment-details">
+                            <div class="appointment-name">Dr. Michael Chen - Cognitive Behavioral Therapy</div>
+                            <div class="appointment-time"><i class="far fa-clock"></i> Tomorrow, 10:00 AM - 11:00 AM</div>
+                        </div>
+                        <span class="appointment-status status-confirmed">Confirmed</span>
+                    </div>
+                    
+                    <div class="appointment-item">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" class="psychologist-img" alt="Dr. Emily Rodriguez">
+                        <div class="appointment-details">
+                            <div class="appointment-name">Dr. Emily Rodriguez - Mindfulness Session</div>
+                            <div class="appointment-time"><i class="far fa-clock"></i> June 15, 2:30 PM - 3:30 PM</div>
+                        </div>
+                        <span class="appointment-status status-confirmed">Confirmed</span>
+                    </div>
+                    
+                    <div class="appointment-item">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" class="psychologist-img" alt="Dr. James Wilson">
+                        <div class="appointment-details">
+                            <div class="appointment-name">Dr. James Wilson - Progress Evaluation</div>
+                            <div class="appointment-time"><i class="far fa-clock"></i> June 22, 4:00 PM - 5:00 PM</div>
+                        </div>
+                        <span class="appointment-status status-pending">Pending</span>
                     </div>
                 </div>
-                <div class="user-card">
-                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Therapist">
-                    <div class="user-info">
-                        <span class="name">Dr. Michael Chen</span>
-                        <span class="status"><span class="status-dot"></span> Online</span>
-                    </div>
-                </div>
-                <div class="user-card">
-                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Therapist">
-                    <div class="user-info">
-                        <span class="name">Dr. Sarah Johnson</span>
-                        <span class="status"><span class="status-dot away"></span> Away</span>
-                    </div>
-                </div>
-                <div class="user-card">
-                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Therapist">
-                    <div class="user-info">
-                        <span class="name">Dr. Robert Davis</span>
-                        <span class="status"><span class="status-dot"></span> Online</span>
+                
+                <div class="card">
+                    <h5 class="section-title"><i class="fas fa-chart-line"></i> Mood Tracker</h5>
+                    <div class="chart-container">
+                        <canvas id="moodChart"></canvas>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="stat-card">
-            <h3><i class="fas fa-clock"></i> Recent Activity</h3>
-            <p>Your last session was 5 days ago with Dr. Emily Parker</p>
-            <div class="progress">
-                <div class="progress-bar" style="width: 45%"></div>
+            
+            <!-- Right Column -->
+            <div class="right-column">
+                <div class="card">
+                    <h5 class="section-title"><i class="fas fa-bell"></i> Recent Activities</h5>
+                    <div class="activity-item">
+                        <div class="activity-icon" style="color: var(--primary); background-color: rgba(93, 95, 239, 0.1);">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div>
+                            <div class="activity-text">Completed mood journal entry</div>
+                            <div class="activity-time"><i class="far fa-clock"></i> 2 hours ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon" style="color: var(--success); background-color: rgba(76, 175, 80, 0.1);">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <div class="activity-text">Attended session with Dr. Chen</div>
+                            <div class="activity-time"><i class="far fa-clock"></i> 3 days ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon" style="color: var(--accent); background-color: rgba(255, 214, 102, 0.1);">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div>
+                            <div class="activity-text">Read article on mindfulness techniques</div>
+                            <div class="activity-time"><i class="far fa-clock"></i> 1 week ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon" style="color: var(--secondary); background-color: rgba(255, 126, 95, 0.1);">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div>
+                            <div class="activity-text">Completed breathing exercise</div>
+                            <div class="activity-time"><i class="far fa-clock"></i> 2 weeks ago</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h5 class="section-title"><i class="fas fa-chart-pie"></i> Session Types</h5>
+                    <div class="chart-container">
+                        <canvas id="sessionChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Book Session Modal -->
-<div class="modal" id="bookSessionModal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>Book a Therapy Session</h3>
-            <button class="close-modal" id="closeBookModal">&times;</button>
+    <!-- Chatbot Interface -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <span><i class="fas fa-robot me-2"></i>SerenityQ Assistant</span>
+            <button class="chatbot-close" id="chatbotClose">&times;</button>
         </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label for="therapist">Select Therapist</label>
-                <select id="therapist">
-                    <option value="">-- Select a therapist --</option>
-                    <option value="emily">Dr. Emily Parker (Cognitive Behavioral Therapy)</option>
-                    <option value="michael">Dr. Michael Chen (Psychodynamic Therapy)</option>
-                    <option value="sarah">Dr. Sarah Johnson (Dialectical Behavior Therapy)</option>
-                    <option value="robert">Dr. Robert Davis (Humanistic Therapy)</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="sessionDate">Session Date</label>
-                <input type="date" id="sessionDate">
-            </div>
-            <div class="form-group">
-                <label for="sessionTime">Session Time</label>
-                <input type="time" id="sessionTime">
-            </div>
-            <div class="form-group">
-                <label for="sessionNotes">Notes (Optional)</label>
-                <textarea id="sessionNotes" placeholder="Any specific concerns or topics you'd like to discuss..."></textarea>
-            </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot-message">Hello Sarah! I'm SerenityQ, your mental health assistant. How can I help you today?</div>
+            <div class="message bot-message">You have an appointment with Dr. Chen tomorrow at 10:00 AM. Would you like me to remind you?</div>
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary" id="cancelBookSession">Cancel</button>
-            <button class="btn btn-primary">Confirm Booking</button>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your message..." id="chatbotInput">
+            <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
-</div>
-
-<!-- Chat Icon -->
-<div class="chat-icon" id="chatIcon">
-    <i class="fas fa-comment-dots"></i>
-</div>
-
-<!-- Chat Container -->
-<div class="chat-container" id="chatContainer">
-    <div class="chat-header">
-        <h3>SerenityQ Bot</h3>
-        <button class="close-chat" id="closeChat">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-        <div class="message bot">
-            <div class="message-content">
-                Hello! I'm SerenityQ, your mental health assistant. How can I help you today?
-            </div>
-            <div class="message-time">2:45 PM</div>
-        </div>
-        <div class="message user">
-            <div class="message-content">
-                Hi! I'd like to book an appointment with a therapist.
-            </div>
-            <div class="message-time">2:46 PM</div>
-        </div>
-        <div class="message bot">
-            <div class="message-content">
-                I can help with that. Would you prefer a male or female therapist?
-            </div>
-            <div class="message-time">2:46 PM</div>
-        </div>
-        <div class="message bot">
-            <div class="message-content">
-                Also, do you have any specific therapy approach in mind (CBT, DBT, Psychodynamic, etc.)?
-            </div>
-            <div class="message-time">2:47 PM</div>
-        </div>
-    </div>
-    <div class="chat-input">
-        <input type="text" placeholder="Type your message..." id="chatInput">
-        <button id="sendMessage">
-            <i class="fas fa-paper-plane"></i>
-        </button>
-    </div>
-</div>
-
     <script src="js/userdashboard.js"></script>
 </body>
 </html>
-

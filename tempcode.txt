@@ -1,0 +1,7 @@
+Make a Website Title: SerenityQ : An Intelligent Appointment Booking System for Effective Mental Health Support Psychologist
+
+Make a dashboard on the user side and the chat bot is on the right side bottom 
+
+and the navbar is top navbar and make it the Logo SqrenityQ on Left and the middle is the navlinks and the right side is the profile and when i click the profile it will be dropdown settings and logout. In this site make the dashboard active make a statistics for it and responsive. Make it look good UI 
+
+use this color schemes :root {     --primary: #5D5FEF;     --primary-light: #8B8DF2;     --secondary: #FF7E5F;     --accent: #FFD166;     --light: #F7F9FC;     --dark: #2B2D42;     --gray: #8D99AE;     --success: #4CAF50;     --error: #F44336;     --modal-bg: rgba(0, 0, 0, 0.5); }
