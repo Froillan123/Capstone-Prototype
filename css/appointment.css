@@ -479,3 +479,213 @@
 
 
 
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--gray);
+    transition: color 0.2s;
+}
+
+.close-modal:hover {
+    color: var(--dark);
+}
+
+.modal-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--light);
+}
+
+.modal-header h2 {
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.current-appointment-info {
+    background-color: var(--light);
+    padding: 0.75rem;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.modal-body {
+    margin-bottom: 1.5rem;
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 0.5rem;
+}
+
+/* Custom scrollbar for modal */
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--light);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(93, 95, 239, 0.2);
+}
+
+select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236c757d' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    padding-right: 2.5rem;
+}
+
+textarea.form-control {
+    min-height: 100px;
+}
+
+.cancellation-policy {
+    background-color: rgba(255, 126, 95, 0.1);
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1.5rem;
+    border-left: 3px solid var(--secondary);
+}
+
+.cancellation-policy h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+}
+
+.cancellation-policy p {
+    font-size: 0.9rem;
+    color: var(--dark);
+    margin: 0;
+}
+
+/* Confirmation Modal Specific Styles */
+.confirmation-content {
+    max-width: 500px;
+    text-align: center;
+}
+
+.confirmation-icon {
+    font-size: 4rem;
+    color: var(--success);
+    margin-bottom: 1rem;
+}
+
+.confirmation-details {
+    background-color: var(--light);
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1.5rem;
+    text-align: left;
+}
+
+.confirmation-details p {
+    margin: 0.5rem 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 10% auto;
+        padding: 1.5rem;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .modal-footer .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95%;
+        padding: 1.25rem;
+        margin: 2% auto;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.25rem;
+    }
+    
+    .form-control {
+        padding: 0.6rem;
+    }
+}
