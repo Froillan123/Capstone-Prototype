@@ -145,7 +145,17 @@ body {
     flex-grow: 1;
 }
 
-.profile-about, .intro-card, .appointments-card {
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.profile-about, .intro-card, .appointments-card, 
+.settings-card, .privacy-card, .billing-card, 
+.billing-history, .interests-card {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -153,7 +163,9 @@ body {
     margin-bottom: 20px;
 }
 
-.profile-about h2, .intro-card h2, .appointments-card h2 {
+.profile-about h2, .intro-card h2, .appointments-card h2,
+.settings-card h2, .privacy-card h2, .billing-card h2,
+.billing-history h2, .interests-card h2 {
     font-size: 20px;
     margin-bottom: 16px;
     color: var(--dark);
@@ -263,6 +275,174 @@ body {
     border-radius: 0 0 8px 8px;
 }
 
+/* Settings Styles */
+.settings-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e4e6eb;
+}
+
+.settings-item:last-child {
+    border-bottom: none;
+}
+
+.settings-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    color: var(--primary);
+}
+
+.settings-details {
+    flex-grow: 1;
+}
+
+.settings-details h3 {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.settings-details p {
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.privacy-item {
+    margin-bottom: 16px;
+}
+
+.privacy-item h3 {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.privacy-item p {
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+/* Billing Styles */
+.payment-method {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #e4e6eb;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: all 0.2s;
+}
+
+.payment-method.active {
+    border-color: var(--primary);
+    background-color: rgba(93, 95, 239, 0.05);
+}
+
+.payment-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    color: var(--primary);
+    font-size: 20px;
+}
+
+.payment-details {
+    flex-grow: 1;
+}
+
+.payment-details h3 {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.payment-details p {
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.payment-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.billing-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e4e6eb;
+}
+
+.billing-item:last-child {
+    border-bottom: none;
+}
+
+.billing-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    color: var(--primary);
+}
+
+.billing-details {
+    flex-grow: 1;
+}
+
+.billing-details h3 {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.billing-details p {
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.billing-amount {
+    font-weight: bold;
+}
+
+/* Interests Styles */
+.interests-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.interest-tag {
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.interest-tag:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
 /* Modal Styles */
 .modal {
     display: none;
@@ -284,6 +464,8 @@ body {
     max-width: 500px;
     padding: 20px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .modal-header {
@@ -304,6 +486,11 @@ body {
     font-size: 24px;
     cursor: pointer;
     color: var(--gray);
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--dark);
 }
 
 .form-group {
@@ -341,6 +528,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
+    transition: all 0.2s;
 }
 
 .btn-secondary {
@@ -349,12 +537,99 @@ body {
     border: none;
 }
 
+.btn-secondary:hover {
+    background-color: #d1d3d8;
+}
+
 .btn-primary {
     background-color: var(--primary);
     color: white;
     border: none;
 }
 
+.btn-primary:hover {
+    background-color: var(--primary-light);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.btn-outline:hover {
+    background-color: rgba(93, 95, 239, 0.1);
+}
+
+.btn-danger {
+    background-color: var(--error);
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #e53935;
+}
+
+/* Payment Method Modal */
+.payment-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.payment-option {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.payment-option i {
+    font-size: 32px;
+    margin-bottom: 8px;
+    color: var(--gray);
+}
+
+.payment-option.active {
+    border-color: var(--primary);
+    background-color: rgba(93, 95, 239, 0.05);
+}
+
+.payment-option.active i {
+    color: var(--primary);
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.paypal-info {
+    text-align: center;
+    padding: 20px;
+}
+
+.paypal-info i {
+    font-size: 48px;
+    color: #003087;
+    margin-bottom: 15px;
+}
+
+.paypal-info p {
+    color: var(--gray);
+}
+
+/* Responsive Styles */
 @media (max-width: 900px) {
     .profile-content {
         flex-direction: column;
@@ -362,6 +637,10 @@ body {
 
     .left-sidebar {
         width: 100%;
+    }
+    
+    .payment-options {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -395,5 +674,10 @@ body {
     .profile-tab {
         padding: 16px 12px;
         font-size: 14px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
     }
 }
