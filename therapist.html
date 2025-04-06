@@ -3,9 +3,406 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Therapist</title>
+    <title>SerenityQ | Intelligent Mental Health Support</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/userdashboard.css">
+    <link rel="stylesheet" href="css/therapist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
 </head>
 <body>
-    
+    <!-- Header with Navigation -->
+    <header class="header">
+        <a href="#" class="logo">
+            <i class="fas fa-brain"></i>
+            SerenityQ
+        </a>
+        
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <nav class="navbar">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="appointment.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+                <li><a href="therapist.html" class="nav-link active"><i class="fas fa-user-md"></i> Therapists</a></li>
+                <li><a href="booking-history.html" class="nav-link"><i class="fas fa-history"></i> Booking History</a></li>
+            </ul>
+            
+            <div class="profile">
+                <span class="profile-name">Sarah</span>
+                <img src="https://randomuser.me/api/portraits/women/45.jpg" class="profile-img" alt="Profile">
+                <div class="dropdown-menu">
+                    <a href="user-profile.html" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
+                    <a href="notifications.html" class="dropdown-item"><i class="fas fa-bell"></i> Notifications</a>
+                    <div class="divider"></div>
+                    <a href="#" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <header>
+            <div class="status-indicator">
+                <div class="status-card">
+                    <div class="status-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Available Psychologists</h3>
+                    <p class="status-online">12</p>
+                </div>
+                <div class="status-card">
+                    <div class="status-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>In Session</h3>
+                    <p class="status-busy">8</p>
+                </div>
+                <div class="status-card">
+                    <div class="status-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3>Offline Today</h3>
+                    <p class="status-offline">5</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Swiper Container -->
+        <div class="swiper therapistSwiper">
+            <div class="swiper-wrapper">
+                <!-- Psychologist 1 -->
+                <div class="swiper-slide psychologist-card">
+                    <div class="profile-header">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Dr. Sarah Johnson" class="profile-pic">
+                        <h2 class="profile-name">Dr. Sarah Johnson</h2>
+                        <p class="profile-specialty">Clinical Psychologist</p>
+                        <span class="status-badge badge-online">Online</span>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experience</span>
+                            <span class="detail-value">15 years</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Specialization</span>
+                            <span class="detail-value">Anxiety, Depression</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rating</span>
+                            <span class="detail-value">4.9 ★ (128 reviews)</span>
+                        </div>
+                        
+                        <div class="availability">
+                            <h4>Available Today</h4>
+                            <div class="availability-slots">
+                                <div class="slot">10:00 AM</div>
+                                <div class="slot booked">11:00 AM</div>
+                                <div class="slot">1:00 PM</div>
+                                <div class="slot">3:00 PM</div>
+                                <div class="slot">4:30 PM</div>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-primary book-btn" data-therapist="Dr. Sarah Johnson">Book Session</button>
+                            <button class="btn btn-secondary view-btn" data-therapist="1">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Psychologist 2 -->
+                <div class="swiper-slide psychologist-card">
+                    <div class="profile-header">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Dr. Michael Chen" class="profile-pic">
+                        <h2 class="profile-name">Dr. Michael Chen</h2>
+                        <p class="profile-specialty">Cognitive Behavioral Therapist</p>
+                        <span class="status-badge badge-busy">In Session</span>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experience</span>
+                            <span class="detail-value">8 years</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Specialization</span>
+                            <span class="detail-value">OCD, PTSD</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rating</span>
+                            <span class="detail-value">4.8 ★ (92 reviews)</span>
+                        </div>
+                        
+                        <div class="availability">
+                            <h4>Available Today</h4>
+                            <div class="availability-slots">
+                                <div class="slot booked">9:00 AM</div>
+                                <div class="slot booked">11:30 AM</div>
+                                <div class="slot">2:00 PM</div>
+                                <div class="slot">5:00 PM</div>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-primary book-btn" data-therapist="Dr. Michael Chen">Book Session</button>
+                            <button class="btn btn-secondary view-btn" data-therapist="2">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Psychologist 3 -->
+                <div class="swiper-slide psychologist-card">
+                    <div class="profile-header">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Dr. Amina Patel" class="profile-pic">
+                        <h2 class="profile-name">Dr. Amina Patel</h2>
+                        <p class="profile-specialty">Child Psychologist</p>
+                        <span class="status-badge badge-offline">Offline</span>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experience</span>
+                            <span class="detail-value">12 years</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Specialization</span>
+                            <span class="detail-value">Child & Adolescent</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rating</span>
+                            <span class="detail-value">4.7 ★ (156 reviews)</span>
+                        </div>
+                        
+                        <div class="availability">
+                            <h4>Available Tomorrow</h4>
+                            <div class="availability-slots">
+                                <div class="slot">9:30 AM</div>
+                                <div class="slot">11:00 AM</div>
+                                <div class="slot">1:30 PM</div>
+                                <div class="slot">3:00 PM</div>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-primary book-btn" data-therapist="Dr. Amina Patel">Book Session</button>
+                            <button class="btn btn-secondary view-btn" data-therapist="3">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Psychologist 4 -->
+                <div class="swiper-slide psychologist-card">
+                    <div class="profile-header">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Dr. Robert Williams" class="profile-pic">
+                        <h2 class="profile-name">Dr. Robert Williams</h2>
+                        <p class="profile-specialty">Marriage Counselor</p>
+                        <span class="status-badge badge-online">Online</span>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experience</span>
+                            <span class="detail-value">10 years</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Specialization</span>
+                            <span class="detail-value">Relationships, Family</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rating</span>
+                            <span class="detail-value">4.8 ★ (112 reviews)</span>
+                        </div>
+                        
+                        <div class="availability">
+                            <h4>Available Today</h4>
+                            <div class="availability-slots">
+                                <div class="slot">9:00 AM</div>
+                                <div class="slot">12:00 PM</div>
+                                <div class="slot booked">2:30 PM</div>
+                                <div class="slot">4:00 PM</div>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-primary book-btn" data-therapist="Dr. Robert Williams">Book Session</button>
+                            <button class="btn btn-secondary view-btn" data-therapist="4">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Psychologist 5 -->
+                <div class="swiper-slide psychologist-card">
+                    <div class="profile-header">
+                        <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Dr. Emily Zhang" class="profile-pic">
+                        <h2 class="profile-name">Dr. Emily Zhang</h2>
+                        <p class="profile-specialty">Neuropsychologist</p>
+                        <span class="status-badge badge-online">Online</span>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experience</span>
+                            <span class="detail-value">7 years</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Specialization</span>
+                            <span class="detail-value">ADHD, Autism</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rating</span>
+                            <span class="detail-value">4.9 ★ (87 reviews)</span>
+                        </div>
+                        
+                        <div class="availability">
+                            <h4>Available Today</h4>
+                            <div class="availability-slots">
+                                <div class="slot booked">10:30 AM</div>
+                                <div class="slot">12:30 PM</div>
+                                <div class="slot">3:30 PM</div>
+                                <div class="slot">5:30 PM</div>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-primary book-btn" data-therapist="Dr. Emily Zhang">Book Session</button>
+                            <button class="btn btn-secondary view-btn" data-therapist="5">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Psychologist 6 -->
+                <div class="swiper-slide psychologist-card">
+                    <div class="profile-header">
+                        <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Dr. David Wilson" class="profile-pic">
+                        <h2 class="profile-name">Dr. David Wilson</h2>
+                        <p class="profile-specialty">Trauma Specialist</p>
+                        <span class="status-badge badge-busy">In Session</span>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Experience</span>
+                            <span class="detail-value">14 years</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Specialization</span>
+                            <span class="detail-value">PTSD, Trauma</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rating</span>
+                            <span class="detail-value">4.7 ★ (143 reviews)</span>
+                        </div>
+                        
+                        <div class="availability">
+                            <h4>Available Tomorrow</h4>
+                            <div class="availability-slots">
+                                <div class="slot">8:30 AM</div>
+                                <div class="slot">11:00 AM</div>
+                                <div class="slot booked">1:00 PM</div>
+                                <div class="slot">4:00 PM</div>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn btn-primary book-btn" data-therapist="Dr. David Wilson">Book Session</button>
+                            <button class="btn btn-secondary view-btn" data-therapist="6">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <!-- Therapist Profile Modal -->
+    <div class="modal" id="therapistModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <img src="" alt="Therapist" id="modalTherapistImg" class="modal-profile-pic">
+                <h2 id="modalTherapistName"></h2>
+                <p id="modalTherapistSpecialty"></p>
+                <span class="status-badge" id="modalTherapistStatus"></span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>About</h3>
+                    <p id="modalTherapistAbout"></p>
+                </div>
+                <div class="modal-section">
+                    <h3>Specializations</h3>
+                    <ul id="modalTherapistSpecializations"></ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Availability</h3>
+                    <div class="availability-slots" id="modalTherapistAvailability"></div>
+                </div>
+                <div class="modal-section">
+                    <h3>Reviews</h3>
+                    <div class="reviews" id="modalTherapistReviews"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="modalBookBtn">Book Session</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2>Book Session with <span id="bookingTherapistName"></span></h2>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="sessionDate">Select Date</label>
+                    <input type="date" id="sessionDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="sessionTime">Select Time</label>
+                    <select id="sessionTime" class="form-control">
+                        <option value="">-- Select a time slot --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sessionNotes">Notes (Optional)</label>
+                    <textarea id="sessionNotes" class="form-control" rows="3" placeholder="Any specific concerns or notes for the therapist..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelBookingBtn">Cancel</button>
+                <button class="btn btn-primary" id="confirmBookingBtn">Confirm Booking</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Interface -->
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <span><i class="fas fa-robot me-2"></i>SerenityQ Assistant</span>
+            <button class="chatbot-close" id="chatbotClose">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot-message">Hello Sarah! I'm SerenityQ, your mental health assistant. How can I help you today?</div>
+            <div class="message bot-message">You have an appointment with Dr. Chen tomorrow at 10:00 AM. Would you like me to remind you?</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your message..." id="chatbotInput">
+            <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="js/userdashboard.js"></script>
+    <script src="js/activeLink.js"></script>
+    <script src="js/therapist.js"></script>
 </body>
 </html>

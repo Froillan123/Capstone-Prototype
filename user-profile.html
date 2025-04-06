@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User-Profile</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/userdashboard.css">
+    <link rel="stylesheet" href="css/user-profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+
+  <!-- Header with Navigation -->
+  <header class="header">
+    <a href="#" class="logo">
+        <i class="fas fa-brain"></i>
+        SerenityQ
+    </a>
+    
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <nav class="navbar">
+        <ul class="nav-links" id="navLinks">
+            <li><a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="appointment.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+            <li><a href="therapist.html" class="nav-link"><i class="fas fa-user-md"></i> Therapists</a></li>
+            <li><a href="booking-history.html" class="nav-link"><i class="fas fa-history"></i> Booking History</a></li>
+        </ul>
+        
+        <div class="profile">
+            <span class="profile-name">Sarah</span>
+            <img src="https://randomuser.me/api/portraits/women/45.jpg" class="profile-img" alt="Profile">
+            <div class="dropdown-menu">
+                <a href="user-profile.html" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
+                <a href="notifications.html" class="dropdown-item"><i class="fas fa-bell"></i> Notifications</a>
+                <div class="divider"></div>
+                <a href="#" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+    <div class="container">
+        <div class="profile-header">
+            <div class="profile-pic">
+                <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Profile Picture">
+                <div class="profile-camera-icon" id="profileCameraIcon">
+                    <i class="fas fa-camera"></i>
+                </div>
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-name" id="profileName">John Doe</h1>
+                <button class="profile-edit-btn" id="editProfileBtn">
+                    <i class="fas fa-pencil-alt"></i> Edit Profile
+                </button>
+            </div>
+        </div>
+
+        <div class="profile-tabs">
+            <div class="profile-tab active">About</div>
+            <div class="profile-tab">Appointments</div>
+            <div class="profile-tab">Settings</div>
+        </div>
+
+        <div class="profile-content">
+            <div class="left-sidebar">
+                <div class="intro-card">
+                    <h2>
+                        Intro
+                        <i class="fas fa-ellipsis-h card-title-icon"></i>
+                    </h2>
+                    <div class="intro-item">
+                        <div class="intro-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div id="workInfo">Works at ABC Company</div>
+                    </div>
+                    <div class="intro-item">
+                        <div class="intro-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div id="educationInfo">Studied at XYZ University</div>
+                    </div>
+                    <div class="intro-item">
+                        <div class="intro-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div id="locationInfo">Lives in New York, USA</div>
+                    </div>
+                    <div class="intro-item">
+                        <div class="intro-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div id="hometownInfo">From Chicago, Illinois</div>
+                    </div>
+                    <div class="intro-item">
+                        <div class="intro-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div id="relationshipInfo">Single</div>
+                    </div>
+                    <div class="intro-item">
+                        <div class="intro-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>Joined January 2020</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-content">
+                <div class="appointments-card">
+                    <h2>
+                        Recent Appointments
+                        <i class="fas fa-ellipsis-h card-title-icon"></i>
+                    </h2>
+                    <div class="appointment-item" data-appointment-id="1">
+                        <div class="appointment-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="appointment-details">
+                            <div class="appointment-title">Dental Check-up</div>
+                            <div class="appointment-date">April 10, 2025 • 10:00 AM</div>
+                            <div class="appointment-status status-upcoming">Upcoming</div>
+                        </div>
+                    </div>
+                    <div class="appointment-item" data-appointment-id="2">
+                        <div class="appointment-icon">
+                            <i class="fas fa-stethoscope"></i>
+                        </div>
+                        <div class="appointment-details">
+                            <div class="appointment-title">Annual Physical</div>
+                            <div class="appointment-date">March 25, 2025 • 2:30 PM</div>
+                            <div class="appointment-status status-completed">Completed</div>
+                        </div>
+                    </div>
+                    <div class="appointment-item" data-appointment-id="3">
+                        <div class="appointment-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="appointment-details">
+                            <div class="appointment-title">Cardiologist Visit</div>
+                            <div class="appointment-date">March 15, 2025 • 11:15 AM</div>
+                            <div class="appointment-status status-cancelled">Cancelled</div>
+                        </div>
+                    </div>
+                    <div class="view-all-btn" id="viewAllAppointments">
+                        See All Appointments
+                    </div>
+                </div>
+                
+                <div class="profile-about">
+                    <h2>
+                        About
+                        <i class="fas fa-ellipsis-h card-title-icon" id="editAboutBtn"></i>
+                    </h2>
+                    <p id="aboutText">
+                        Hi, I'm John! I'm a software developer passionate about creating user-friendly applications.
+                        In my free time, I enjoy hiking, photography, and exploring new coffee shops.
+                        Feel free to connect with me if you share similar interests or have exciting project ideas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal" id="editProfileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Profile</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="editName" class="form-label">Full Name</label>
+                    <input type="text" id="editName" class="form-input" value="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="editWork" class="form-label">Work</label>
+                    <input type="text" id="editWork" class="form-input" value="ABC Company">
+                </div>
+                <div class="form-group">
+                    <label for="editEducation" class="form-label">Education</label>
+                    <input type="text" id="editEducation" class="form-input" value="XYZ University">
+                </div>
+                <div class="form-group">
+                    <label for="editLocation" class="form-label">Current Location</label>
+                    <input type="text" id="editLocation" class="form-input" value="New York, USA">
+                </div>
+                <div class="form-group">
+                    <label for="editHometown" class="form-label">Hometown</label>
+                    <input type="text" id="editHometown" class="form-input" value="Chicago, Illinois">
+                </div>
+                <div class="form-group">
+                    <label for="editRelationship" class="form-label">Relationship Status</label>
+                    <select id="editRelationship" class="form-input">
+                        <option value="Single">Single</option>
+                        <option value="In a relationship">In a relationship</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelEdit">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit About Modal -->
+    <div class="modal" id="editAboutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit About</h2>
+                <button class="close-btn" id="closeAboutModal">&times;</button>
+            </div>
+            <form id="aboutForm">
+                <div class="form-group">
+                    <label for="aboutTextarea" class="form-label">About Me</label>
+                    <textarea id="aboutTextarea" class="form-input" rows="6">Hi, I'm John! I'm a software developer passionate about creating user-friendly applications.
+In my free time, I enjoy hiking, photography, and exploring new coffee shops.
+Feel free to connect with me if you share similar interests or have exciting project ideas.</textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelAboutEdit">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Image Upload Modal -->
+    <div class="modal" id="imageUploadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Change Profile Picture</h2>
+                <button class="close-btn" id="closeImageModal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Select an image</label>
+                <input type="file" id="profileImageUpload" accept="image/*" style="display: none;">
+                <button class="btn btn-secondary" id="chooseImageBtn" style="width: 100%; margin-bottom: 15px;">
+                    <i class="fas fa-folder-open"></i> Choose Image
+                </button>
+                <div id="imagePreviewContainer" style="text-align: center; margin-bottom: 15px; display: none;">
+                    <img id="imagePreview" style="max-width: 100%; max-height: 300px; border-radius: 4px;">
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="cancelImageUpload">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveImageBtn" disabled>Save Picture</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            const editProfileModal = document.getElementById('editProfileModal');
+            const closeModal = document.getElementById('closeModal');
+            const cancelEdit = document.getElementById('cancelEdit');
+            const profileForm = document.getElementById('profileForm');
+            const editAboutBtn = document.getElementById('editAboutBtn');
+            const editAboutModal = document.getElementById('editAboutModal');
+            const closeAboutModal = document.getElementById('closeAboutModal');
+            const cancelAboutEdit = document.getElementById('cancelAboutEdit');
+            const aboutForm = document.getElementById('aboutForm');
+            const aboutText = document.getElementById('aboutText');
+            const profileCameraIcon = document.getElementById('profileCameraIcon');
+            const imageUploadModal = document.getElementById('imageUploadModal');
+            const closeImageModal = document.getElementById('closeImageModal');
+            const cancelImageUpload = document.getElementById('cancelImageUpload');
+            const chooseImageBtn = document.getElementById('chooseImageBtn');
+            const profileImageUpload = document.getElementById('profileImageUpload');
+            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+            const imagePreview = document.getElementById('imagePreview');
+            const saveImageBtn = document.getElementById('saveImageBtn');
+            const viewAllAppointments = document.getElementById('viewAllAppointments');
+            const appointmentItems = document.querySelectorAll('.appointment-item');
+            const profileName = document.getElementById('profileName');
+            const workInfo = document.getElementById('workInfo');
+            const educationInfo = document.getElementById('educationInfo');
+            const locationInfo = document.getElementById('locationInfo');
+            const hometownInfo = document.getElementById('hometownInfo');
+            const relationshipInfo = document.getElementById('relationshipInfo');
+
+            // Profile data
+            let profileData = {
+                name: "John Doe",
+                work: "ABC Company",
+                education: "XYZ University",
+                location: "New York, USA",
+                hometown: "Chicago, Illinois",
+                relationship: "Single",
+                about: aboutText.textContent,
+                profileImage: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+            };
+
+            // Edit Profile Modal
+            editProfileBtn.addEventListener('click', () => {
+                // Populate form with current data
+                document.getElementById('editName').value = profileData.name;
+                document.getElementById('editWork').value = profileData.work;
+                document.getElementById('editEducation').value = profileData.education;
+                document.getElementById('editLocation').value = profileData.location;
+                document.getElementById('editHometown').value = profileData.hometown;
+                document.getElementById('editRelationship').value = profileData.relationship;
+                
+                editProfileModal.style.display = 'flex';
+            });
+
+            closeModal.addEventListener('click', () => {
+                editProfileModal.style.display = 'none';
+            });
+
+            cancelEdit.addEventListener('click', () => {
+                editProfileModal.style.display = 'none';
+            });
+
+            profileForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Update profile data
+                profileData.name = document.getElementById('editName').value;
+                profileData.work = document.getElementById('editWork').value;
+                profileData.education = document.getElementById('editEducation').value;
+                profileData.location = document.getElementById('editLocation').value;
+                profileData.hometown = document.getElementById('editHometown').value;
+                profileData.relationship = document.getElementById('editRelationship').value;
+                
+                // Update UI
+                profileName.textContent = profileData.name;
+                workInfo.textContent = `Works at ${profileData.work}`;
+                educationInfo.textContent = `Studied at ${profileData.education}`;
+                locationInfo.textContent = `Lives in ${profileData.location}`;
+                hometownInfo.textContent = `From ${profileData.hometown}`;
+                relationshipInfo.textContent = profileData.relationship;
+                
+                editProfileModal.style.display = 'none';
+                alert('Profile updated successfully!');
+            });
+
+            // Edit About Modal
+            editAboutBtn.addEventListener('click', () => {
+                document.getElementById('aboutTextarea').value = profileData.about;
+                editAboutModal.style.display = 'flex';
+            });
+
+            closeAboutModal.addEventListener('click', () => {
+                editAboutModal.style.display = 'none';
+            });
+
+            cancelAboutEdit.addEventListener('click', () => {
+                editAboutModal.style.display = 'none';
+            });
+
+            aboutForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                profileData.about = document.getElementById('aboutTextarea').value;
+                aboutText.textContent = profileData.about;
+                editAboutModal.style.display = 'none';
+                alert('About section updated successfully!');
+            });
+
+            // Image Upload Modal
+            profileCameraIcon.addEventListener('click', () => {
+                imageUploadModal.style.display = 'flex';
+            });
+
+            closeImageModal.addEventListener('click', () => {
+                imageUploadModal.style.display = 'none';
+                resetImageUpload();
+            });
+
+            cancelImageUpload.addEventListener('click', () => {
+                imageUploadModal.style.display = 'none';
+                resetImageUpload();
+            });
+
+            chooseImageBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                profileImageUpload.click();
+            });
+
+            profileImageUpload.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        imagePreview.src = event.target.result;
+                        imagePreviewContainer.style.display = 'block';
+                        saveImageBtn.disabled = false;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            saveImageBtn.addEventListener('click', () => {
+                const profilePic = document.querySelector('.profile-pic img');
+                profilePic.src = imagePreview.src;
+                profileData.profileImage = imagePreview.src;
+                imageUploadModal.style.display = 'none';
+                resetImageUpload();
+                alert('Profile picture updated successfully!');
+            });
+
+            function resetImageUpload() {
+                profileImageUpload.value = '';
+                imagePreviewContainer.style.display = 'none';
+                saveImageBtn.disabled = true;
+            }
+
+            // Appointment functionality
+            viewAllAppointments.addEventListener('click', () => {
+                alert('Redirecting to all appointments page...');
+                // In a real app, this would navigate to appointments page
+            });
+
+            appointmentItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const appointmentId = item.getAttribute('data-appointment-id');
+                    alert(`Viewing details for appointment #${appointmentId}`);
+                    // In a real app, this would show appointment details
+                });
+            });
+
+            // Close modals when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === editProfileModal) {
+                    editProfileModal.style.display = 'none';
+                }
+                if (e.target === editAboutModal) {
+                    editAboutModal.style.display = 'none';
+                }
+                if (e.target === imageUploadModal) {
+                    imageUploadModal.style.display = 'none';
+                    resetImageUpload();
+                }
+            });
+        });
+    </script>
+     <script src="js/activeLink.js"></script>
+</body>
+</html>
