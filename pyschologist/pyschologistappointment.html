@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychologist Appointment</title>
+    <link rel="stylesheet" href="../css/pyschologist/navbar.css">
+    <link rel="stylesheet" href="../css/pyschologist/pyschologistappointment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- FullCalendar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+    <style>
+        /* Additional Styles for Appointment Page */
+
+        .main-container {
+            flex: 1;
+            margin-left: 240px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            min-width: 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header h1 {
+            color: var(--primary);
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            padding-left: 40px;
+            border-radius: 50px;
+            border: 2px solid var(--primary-light);
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(93, 95, 239, 0.2);
+        }
+
+        .search-box .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-light);
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-info p {
+            font-weight: 600;
+        }
+
+        .user-info small {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* Calendar and Appointments Layout */
+        .appointment-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1200px) {
+            .appointment-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Calendar Section */
+        .calendar-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-header h3 {
+            color: var(--primary);
+        }
+
+        .calendar-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .calendar-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .calendar-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .calendar-btn.secondary {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--primary-light);
+        }
+
+        .calendar-btn.secondary:hover {
+            background-color: var(--light);
+        }
+
+        #calendar {
+            margin-top: 20px;
+        }
+
+        /* Appointments List */
+        .appointments-list {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .appointments-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .appointments-header h3 {
+            color: var(--primary);
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid var(--primary-light);
+            background-color: white;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .appointment-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .appointment-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .appointment-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .appointment-card.upcoming {
+            border-left-color: var(--success);
+        }
+
+        .appointment-card.pending {
+            border-left-color: var(--accent);
+        }
+
+        .appointment-card.cancelled {
+            border-left-color: var(--error);
+        }
+
+        .appointment-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .appointment-time {
+            font-weight: 600;
+            color: var(--primary);
+            background-color: rgba(93, 95, 239, 0.1);
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+
+        .appointment-status {
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        .status-confirmed {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--success);
+        }
+
+        .status-pending {
+            background-color: rgba(255, 209, 102, 0.1);
+            color: var(--accent);
+        }
+
+        .status-cancelled {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: var(--error);
+        }
+
+        .appointment-patient {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .patient-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .patient-info h4 {
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .patient-info p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .appointment-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .appointment-type {
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        .appointment-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .primary-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .primary-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .secondary-btn {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--primary-light);
+        }
+
+        .secondary-btn:hover {
+            background-color: var(--light);
+        }
+
+        /* Appointment Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal-patient-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-patient-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .modal-patient-details h4 {
+            margin: 0 0 5px 0;
+            font-size: 1.2rem;
+        }
+
+        .modal-patient-details p {
+            margin: 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .modal-appointment-details {
+            margin-bottom: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .detail-label {
+            width: 120px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .detail-value {
+            flex: 1;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-container {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .header {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .search-box {
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+                margin-top: 0;
+            }
+
+            .user-profile {
+                margin-left: auto;
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .appointment-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .appointments-header, .calendar-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .filter-options, .calendar-actions {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+
+            .main-container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-box {
+                order: initial;
+                width: 100%;
+            }
+            
+            .user-profile {
+                margin-left: 0;
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .appointment-details {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .appointment-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .modal-actions .action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* FullCalendar Customization */
+        .fc .fc-toolbar-title {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .fc .fc-button {
+            background-color: var(--primary);
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .fc .fc-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .fc .fc-button-primary:not(:disabled).fc-button-active {
+            background-color: var(--primary-dark);
+        }
+
+        .fc .fc-daygrid-day-number {
+            color: var(--dark);
+        }
+
+        .fc .fc-daygrid-day.fc-day-today {
+            background-color: rgba(93, 95, 239, 0.1);
+        }
+
+        .fc .fc-event {
+            background-color: var(--primary);
+            border: none;
+            padding: 2px 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .fc .fc-event:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .fc .fc-daygrid-event-dot {
+            border-color: var(--primary);
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- Sidebar/Navbar -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-sidebar" id="closeSidebar">
+            <i class='bx bx-chevron-left'></i>
+        </button>
+        <div class="sidebar-header">
+            <i class='bx bx-brain icon'></i>
+            <h3>SerenityQ</h3>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="pyschologistdashboard.html">
+                    <i class='bx bx-bar-chart-alt-2 icon'></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="pyschologistappointment.html">
+                    <i class='bx bx-calendar icon'></i>
+                    <span>Appointments</span>
+                </a>
+            </li>
+            <li>
+                <a href="pyschologistSessions.html">
+                    <i class='bx bx-conversation icon'></i>
+                    <span>Sessions</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-group icon'></i>
+                    <span>Patients</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-notepad icon'></i>
+                    <span>Notes</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-line-chart icon'></i>
+                    <span>Reports</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog icon'></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-log-out icon'></i>
+                    <span>Log Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="header">
+            <div style="display: flex; align-items: center;">
+                <button class="hamburger" id="toggleSidebar">
+                    <i class='bx bx-menu'></i>
+                </button>
+                <h1>Appointments</h1>
+            </div>
+            <div class="search-box">
+                <i class='bx bx-search search-icon'></i>
+                <input type="text" placeholder="Search appointments...">
+            </div>
+            <div class="user-profile">
+                <div class="user-info">
+                    <p>Dr. Sarah Johnson</p>
+                    <small>Clinical Psychologist</small>
+                </div>
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile Photo">
+            </div>
+        </div>
+
+        <!-- Calendar and Appointments Layout -->
+        <div class="appointment-layout">
+            <!-- Calendar Section -->
+            <div class="calendar-section">
+                <div class="calendar-header">
+                    <h3>Appointment Calendar</h3>
+                    <div class="calendar-actions">
+                        <button class="calendar-btn secondary" id="prevMonth">
+                            <i class='bx bx-chevron-left'></i>
+                        </button>
+                        <button class="calendar-btn secondary" id="todayBtn">Today</button>
+                        <button class="calendar-btn secondary" id="nextMonth">
+                            <i class='bx bx-chevron-right'></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="calendar"></div>
+            </div>
+
+            <!-- Appointments List Section -->
+            <div class="appointments-list">
+                <div class="appointments-header">
+                    <h3>Upcoming Appointments</h3>
+                    <div class="filter-options">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Today</button>
+                        <button class="filter-btn">This Week</button>
+                    </div>
+                </div>
+                <div class="appointment-items">
+                    <!-- Appointment Card 1 -->
+                    <div class="appointment-card upcoming">
+                        <div class="appointment-card-header">
+                            <span class="appointment-time">10:00 AM - 11:00 AM</span>
+                            <span class="appointment-status status-confirmed">Confirmed</span>
+                        </div>
+                        <div class="appointment-patient">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Patient" class="patient-avatar">
+                            <div class="patient-info">
+                                <h4>Michael Brown</h4>
+                                <p>ID: P-7802 | Anxiety Treatment</p>
+                            </div>
+                        </div>
+                        <div class="appointment-details">
+                            <span class="appointment-type">Cognitive Behavioral Therapy</span>
+                            <div class="appointment-actions">
+                                <button class="action-btn secondary-btn">
+                                    <i class='bx bx-chat'></i> Message
+                                </button>
+                                <button class="action-btn primary-btn start-session-btn" data-patient="Michael Brown" data-type="Cognitive Behavioral Therapy">
+                                    <i class='bx bx-video'></i> Start
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appointment Card 2 -->
+                    <div class="appointment-card upcoming">
+                        <div class="appointment-card-header">
+                            <span class="appointment-time">2:30 PM - 3:30 PM</span>
+                            <span class="appointment-status status-confirmed">Confirmed</span>
+                        </div>
+                        <div class="appointment-patient">
+                            <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Patient" class="patient-avatar">
+                            <div class="patient-info">
+                                <h4>Jessica Smith</h4>
+                                <p>ID: P-7731 | Depression</p>
+                            </div>
+                        </div>
+                        <div class="appointment-details">
+                            <span class="appointment-type">Psychotherapy Session</span>
+                            <div class="appointment-actions">
+                                <button class="action-btn secondary-btn">
+                                    <i class='bx bx-chat'></i> Message
+                                </button>
+                                <button class="action-btn primary-btn start-session-btn" data-patient="Jessica Smith" data-type="Psychotherapy Session">
+                                    <i class='bx bx-video'></i> Start
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appointment Card 3 -->
+                    <div class="appointment-card pending">
+                        <div class="appointment-card-header">
+                            <span class="appointment-time">Tomorrow, 9:00 AM</span>
+                            <span class="appointment-status status-pending">Pending</span>
+                        </div>
+                        <div class="appointment-patient">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Patient" class="patient-avatar">
+                            <div class="patient-info">
+                                <h4>David Wilson</h4>
+                                <p>ID: P-7698 | PTSD</p>
+                            </div>
+                        </div>
+                        <div class="appointment-details">
+                            <span class="appointment-type">Trauma Therapy</span>
+                            <div class="appointment-actions">
+                                <button class="action-btn secondary-btn">
+                                    <i class='bx bx-chat'></i> Message
+                                </button>
+                                <button class="action-btn secondary-btn confirm-btn">
+                                    <i class='bx bx-check'></i> Confirm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appointment Card 4 -->
+                    <div class="appointment-card">
+                        <div class="appointment-card-header">
+                            <span class="appointment-time">Apr 09, 11:00 AM</span>
+                            <span class="appointment-status status-confirmed">Confirmed</span>
+                        </div>
+                        <div class="appointment-patient">
+                            <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Patient" class="patient-avatar">
+                            <div class="patient-info">
+                                <h4>Amanda Lee</h4>
+                                <p>ID: P-7645 | Stress Management</p>
+                            </div>
+                        </div>
+                        <div class="appointment-details">
+                            <span class="appointment-type">Mindfulness Session</span>
+                            <div class="appointment-actions">
+                                <button class="action-btn secondary-btn">
+                                    <i class='bx bx-chat'></i> Message
+                                </button>
+                                <button class="action-btn secondary-btn reschedule-btn">
+                                    <i class='bx bx-edit'></i> Reschedule
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appointment Modal -->
+    <div class="modal-overlay" id="appointmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Appointment Details</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-patient-info">
+                <img src="" alt="Patient" class="modal-patient-avatar" id="modalPatientAvatar">
+                <div class="modal-patient-details">
+                    <h4 id="modalPatientName"></h4>
+                    <p id="modalPatientId"></p>
+                    <p id="modalPatientCondition"></p>
+                </div>
+            </div>
+            <div class="modal-appointment-details">
+                <div class="detail-row">
+                    <div class="detail-label">Date & Time:</div>
+                    <div class="detail-value" id="modalAppointmentTime"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Type:</div>
+                    <div class="detail-value" id="modalAppointmentType"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Status:</div>
+                    <div class="detail-value" id="modalAppointmentStatus"></div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Notes:</div>
+                    <div class="detail-value" id="modalAppointmentNotes">No additional notes</div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="action-btn secondary-btn" id="modalMessageBtn">
+                    <i class='bx bx-chat'></i> Message
+                </button>
+                <button class="action-btn primary-btn" id="modalStartBtn">
+                    <i class='bx bx-video'></i> Start Session
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    
+    <script>
+        // Toggle sidebar
+        const sidebar = document.getElementById('sidebar');
+        const toggleSidebar = document.getElementById('toggleSidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+    
+        toggleSidebar.addEventListener('click', function () {
+            sidebar.classList.add('active');
+        });
+    
+        closeSidebar.addEventListener('click', function () {
+            sidebar.classList.remove('active');
+        });
+    
+        // Appointment Modal
+        const appointmentModal = document.getElementById('appointmentModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalStartBtn = document.getElementById('modalStartBtn');
+        
+        // Sample data for appointments
+        const appointments = [
+            {
+                id: 1,
+                patientName: "Michael Brown",
+                patientId: "P-7802",
+                condition: "Anxiety Treatment",
+                avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+                time: "Today, 10:00 AM - 11:00 AM",
+                type: "Cognitive Behavioral Therapy",
+                status: "Confirmed",
+                notes: "Patient prefers to focus on social anxiety this session."
+            },
+            {
+                id: 2,
+                patientName: "Jessica Smith",
+                patientId: "P-7731",
+                condition: "Depression",
+                avatar: "https://randomuser.me/api/portraits/women/63.jpg",
+                time: "Today, 2:30 PM - 3:30 PM",
+                type: "Psychotherapy Session",
+                status: "Confirmed",
+                notes: "Follow-up on medication effectiveness."
+            },
+            {
+                id: 3,
+                patientName: "David Wilson",
+                patientId: "P-7698",
+                condition: "PTSD",
+                avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+                time: "Tomorrow, 9:00 AM",
+                type: "Trauma Therapy",
+                status: "Pending",
+                notes: "New patient - initial assessment needed."
+            },
+            {
+                id: 4,
+                patientName: "Amanda Lee",
+                patientId: "P-7645",
+                condition: "Stress Management",
+                avatar: "https://randomuser.me/api/portraits/women/28.jpg",
+                time: "Apr 09, 11:00 AM",
+                type: "Mindfulness Session",
+                status: "Confirmed",
+                notes: "Continue with relaxation techniques."
+            }
+        ];
+    
+        // Function to open modal with appointment details
+        function openAppointmentModal(appointmentId) {
+            const appointment = appointments.find(app => app.id === appointmentId);
+            if (appointment) {
+                document.getElementById('modalPatientAvatar').src = appointment.avatar;
+                document.getElementById('modalPatientName').textContent = appointment.patientName;
+                document.getElementById('modalPatientId').textContent = `ID: ${appointment.patientId}`;
+                document.getElementById('modalPatientCondition').textContent = appointment.condition;
+                document.getElementById('modalAppointmentTime').textContent = appointment.time;
+                document.getElementById('modalAppointmentType').textContent = appointment.type;
+                document.getElementById('modalAppointmentStatus').textContent = appointment.status;
+                document.getElementById('modalAppointmentNotes').textContent = appointment.notes;
+                
+                // Set data attributes for start button
+                modalStartBtn.setAttribute('data-patient', appointment.patientName);
+                modalStartBtn.setAttribute('data-type', appointment.type);
+                
+                appointmentModal.classList.add('active');
+            }
+        }
+    
+        // Close modal
+        closeModal.addEventListener('click', function() {
+            appointmentModal.classList.remove('active');
+        });
+    
+        // Close modal when clicking outside
+        appointmentModal.addEventListener('click', function(e) {
+            if (e.target === appointmentModal) {
+                appointmentModal.classList.remove('active');
+            }
+        });
+    
+        // Start session from modal
+        modalStartBtn.addEventListener('click', function() {
+            const patientName = this.getAttribute('data-patient');
+            const sessionType = this.getAttribute('data-type');
+            startSession(patientName, sessionType);
+        });
+    
+        // Start session from card buttons
+        document.querySelectorAll('.start-session-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const patientName = this.getAttribute('data-patient');
+                const sessionType = this.getAttribute('data-type');
+                startSession(patientName, sessionType);
+            });
+        });
+    
+        // Function to start session (redirect to sessions page)
+        function startSession(patientName, sessionType) {
+            // In a real app, you might pass parameters to the session page
+            window.location.href = 'pyschologistSessions.html';
+        }
+    
+        // Confirm appointment button
+        document.querySelectorAll('.confirm-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.appointment-card');
+                const statusBadge = card.querySelector('.appointment-status');
+                
+                // Change to confirmed status
+                statusBadge.textContent = 'Confirmed';
+                statusBadge.className = 'appointment-status status-confirmed';
+                card.className = 'appointment-card upcoming';
+                
+                // Change button to start session
+                const buttonsContainer = this.closest('.appointment-actions');
+                this.remove();
+                buttonsContainer.innerHTML += `
+                    <button class="action-btn primary-btn start-session-btn" data-patient="David Wilson" data-type="Trauma Therapy">
+                        <i class='bx bx-video'></i> Start
+                    </button>
+                `;
+                
+                // Add event listener to new button
+                buttonsContainer.querySelector('.start-session-btn').addEventListener('click', function() {
+                    const patientName = this.getAttribute('data-patient');
+                    const sessionType = this.getAttribute('data-type');
+                    startSession(patientName, sessionType);
+                });
+            });
+        });
+    
+        // Initialize Calendar
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: false,
+                height: 'auto',
+                events: [
+                    {
+                        id: 1,
+                        title: 'Michael Brown - CBT',
+                        start: new Date(),
+                        extendedProps: {
+                            status: 'confirmed'
+                        }
+                    },
+                    {
+                        id: 2,
+                        title: 'Jessica Smith - Therapy',
+                        start: new Date(),
+                        extendedProps: {
+                            status: 'confirmed'
+                        }
+                    },
+                    {
+                        id: 3,
+                        title: 'David Wilson - Trauma',
+                        start: new Date(new Date().setDate(new Date().getDate() + 1)),
+                        extendedProps: {
+                            status: 'pending'
+                        }
+                    },
+                    {
+                        id: 4,
+                        title: 'Amanda Lee - Mindfulness',
+                        start: new Date(new Date().setDate(new Date().getDate() + 5)),
+                        extendedProps: {
+                            status: 'confirmed'
+                        }
+                    }
+                ],
+                eventClick: function(info) {
+                    // Open modal when event is clicked
+                    openAppointmentModal(parseInt(info.event.id));
+                    info.jsEvent.preventDefault();
+                },
+                eventContent: function(arg) {
+                    let statusDot = '';
+                    if (arg.event.extendedProps.status === 'confirmed') {
+                        statusDot = '<div style="background-color: #4CAF50; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></div>';
+                    } else if (arg.event.extendedProps.status === 'pending') {
+                        statusDot = '<div style="background-color: #FFD166; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></div>';
+                    }
+                    
+                    return {
+                        html: statusDot + arg.event.title
+                    };
+                },
+                eventClassNames: function(arg) {
+                    // Add custom classes based on event status
+                    if (arg.event.extendedProps.status === 'confirmed') {
+                        return ['confirmed-event'];
+                    } else if (arg.event.extendedProps.status === 'pending') {
+                        return ['pending-event'];
+                    }
+                    return [];
+                }
+            });
+    
+            calendar.render();
+    
+            // Calendar Navigation
+            document.getElementById('prevMonth').addEventListener('click', function() {
+                calendar.prev();
+            });
+    
+            document.getElementById('nextMonth').addEventListener('click', function() {
+                calendar.next();
+            });
+    
+            document.getElementById('todayBtn').addEventListener('click', function() {
+                calendar.today();
+            });
+    
+            // Filter Appointments
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filter = this.textContent.toLowerCase();
+                    filterAppointments(filter);
+                });
+            });
+    
+            function filterAppointments(filter) {
+                const today = new Date();
+                const nextWeek = new Date();
+                nextWeek.setDate(today.getDate() + 7);
+                
+                const appointmentCards = document.querySelectorAll('.appointment-card');
+                
+                appointmentCards.forEach(card => {
+                    const timeElement = card.querySelector('.appointment-time');
+                    const timeText = timeElement.textContent.toLowerCase();
+                    
+                    let showCard = true;
+                    
+                    if (filter === 'today') {
+                        showCard = timeText.includes('today');
+                    } else if (filter === 'this week') {
+                        // This is a simplified check - in a real app you'd parse dates
+                        showCard = timeText.includes('today') || 
+                                  timeText.includes('tomorrow') || 
+                                  timeText.includes('mon') ||
+                                  timeText.includes('tue') ||
+                                  timeText.includes('wed') ||
+                                  timeText.includes('thu') ||
+                                  timeText.includes('fri') ||
+                                  timeText.includes('sat') ||
+                                  timeText.includes('sun');
+                    }
+                    
+                    if (filter !== 'all' && !showCard) {
+                        card.style.display = 'none';
+                    } else {
+                        card.style.display = 'block';
+                    }
+                });
+            }
+    
+            // Search functionality
+            const searchInput = document.querySelector('.search-box input');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const appointmentCards = document.querySelectorAll('.appointment-card');
+                
+                appointmentCards.forEach(card => {
+                    const patientName = card.querySelector('.patient-info h4').textContent.toLowerCase();
+                    const patientId = card.querySelector('.patient-info p').textContent.toLowerCase();
+                    const appointmentType = card.querySelector('.appointment-type').textContent.toLowerCase();
+                    
+                    if (patientName.includes(searchTerm) || 
+                        patientId.includes(searchTerm) || 
+                        appointmentType.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+    
+            // Reschedule button functionality
+            document.querySelectorAll('.reschedule-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // In a real app, this would open a rescheduling modal
+                    alert('Reschedule functionality would open a date/time picker here.');
+                });
+            });
+    
+            // Message button functionality
+            document.querySelectorAll('.action-btn.secondary-btn').forEach(btn => {
+                if (btn.querySelector('.bx-chat')) {
+                    btn.addEventListener('click', function() {
+                        // In a real app, this would open a messaging interface
+                        alert('Messaging functionality would open a chat interface here.');
+                    });
+                }
+            });
+    
+            // Modal message button
+            document.getElementById('modalMessageBtn').addEventListener('click', function() {
+                alert('Messaging functionality would open a chat interface here.');
+            });
+        });
+    
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const isClickInsideSidebar = sidebar.contains(event.target);
+            const isClickOnHamburger = toggleSidebar.contains(event.target);
+            
+            if (!isClickInsideSidebar && !isClickOnHamburger && window.innerWidth <= 992) {
+                sidebar.classList.remove('active');
+            }
+        });
+    
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
