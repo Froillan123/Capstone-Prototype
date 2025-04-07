@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychologist Sessions</title>
+    <link rel="stylesheet" href="../css/pyschologist/navbar.css">
+    <link rel="stylesheet" href="../css/pyschologist/pyschologistsession.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+    <style>
+       
+
+    </style>
+</head>
+<body>
+    <!-- Sidebar/Navbar -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-sidebar" id="closeSidebar">
+            <i class='bx bx-chevron-left'></i>
+        </button>
+        <div class="sidebar-header">
+            <i class='bx bx-brain icon'></i>
+            <h3>SerenityQ</h3>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="pyschologistdashboard.html">
+                    <i class='bx bx-bar-chart-alt-2 icon'></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="pyschologistappointment.html">
+                    <i class='bx bx-calendar icon'></i>
+                    <span>Appointments</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="pyschologistSessions.html">
+                    <i class='bx bx-conversation icon'></i>
+                    <span>Sessions</span>
+                </a>
+            </li>
+            <li>
+                <a href="pyschologistsettings.html">
+                    <i class='bx bx-cog icon'></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-log-out icon'></i>
+                    <span>Log Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-container">
+        <div class="header">
+            <div style="display: flex; align-items: center;">
+                <button class="hamburger" id="toggleSidebar">
+                    <i class='bx bx-menu'></i>
+                </button>
+                <h1>Sessions</h1>
+            </div>
+            <div class="search-box">
+                <i class='bx bx-search search-icon'></i>
+                <input type="text" placeholder="Search patients, sessions...">
+            </div>
+            <div class="user-profile">
+                <div class="user-info">
+                    <p>Dr. Sarah Johnson</p>
+                    <small>Clinical Psychologist</small>
+                </div>
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile Photo">
+            </div>
+        </div>
+
+        <div class="sessions-container">
+            <!-- Patients List -->
+            <div class="patients-list">
+                <h2>Active Sessions</h2>
+                <div class="patient-card active" data-patient="michael-brown">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Patient">
+                    <div class="patient-info">
+                        <h4>Michael Brown</h4>
+                        <p>Anxiety Treatment</p>
+                        <span class="session-status status-active">Active Now</span>
+                    </div>
+                </div>
+                <div class="patient-card" data-patient="jessica-smith">
+                    <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Patient">
+                    <div class="patient-info">
+                        <h4>Jessica Smith</h4>
+                        <p>Depression</p>
+                        <span class="session-status status-pending">Pending</span>
+                    </div>
+                </div>
+                <div class="patient-card" data-patient="david-wilson">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Patient">
+                    <div class="patient-info">
+                        <h4>David Wilson</h4>
+                        <p>PTSD</p>
+                        <span class="session-status status-completed">Completed</span>
+                    </div>
+                </div>
+                <div class="patient-card" data-patient="amanda-lee">
+                    <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Patient">
+                    <div class="patient-info">
+                        <h4>Amanda Lee</h4>
+                        <p>Stress Management</p>
+                        <span class="session-status status-completed">Completed</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Container -->
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-user">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Patient">
+                        <div class="chat-user-info">
+                            <h4>Michael Brown</h4>
+                            <p>Active Now</p>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <button class="chat-action-btn" id="voiceCallBtn">
+                            <i class='bx bx-phone'></i>
+                        </button>
+                        <button class="chat-action-btn" id="videoCallBtn">
+                            <i class='bx bx-video'></i>
+                        </button>
+                        <button class="chat-action-btn end-call" id="endSessionBtn">
+                            <i class='bx bx-x'></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="chat-messages">
+                    <div class="message message-patient">
+                        <div class="message-content">
+                            Hello Dr. Johnson, I've been feeling really anxious about my upcoming presentation.
+                        </div>
+                        <div class="message-time">10:30 AM</div>
+                    </div>
+                    <div class="message message-psychologist">
+                        <div class="message-content">
+                            Hi Michael, I understand. Let's talk about what specifically is making you anxious.
+                        </div>
+                        <div class="message-time">10:32 AM</div>
+                    </div>
+                    <div class="message message-patient">
+                        <div class="message-content">
+                            I'm worried I'll forget what to say and everyone will think I'm incompetent.
+                        </div>
+                        <div class="message-time">10:33 AM</div>
+                    </div>
+                    <div class="message message-psychologist">
+                        <div class="message-content">
+                            That's a common fear. Remember our breathing exercises? Let's practice those now.
+                        </div>
+                        <div class="message-time">10:35 AM</div>
+                    </div>
+                    <div class="message message-patient">
+                        <div class="message-content">
+                            Okay, I'll try. *deep breath* I feel a bit better already.
+                        </div>
+                        <div class="message-time">10:36 AM</div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="Type your message...">
+                    <button><i class='bx bx-send'></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session Request -->
+        <div class="session-request">
+            <h3>New Session Request</h3>
+            <div class="request-details">
+                <div class="request-row">
+                    <div class="request-label">Patient:</div>
+                    <div class="request-value">Michael Brown</div>
+                </div>
+                <div class="request-row">
+                    <div class="request-label">Requested Date:</div>
+                    <div class="request-value">April 15, 2023 at 2:00 PM</div>
+                </div>
+                <div class="request-row">
+                    <div class="request-label">Session Type:</div>
+                    <div class="request-value">Follow-up Consultation</div>
+                </div>
+                <div class="request-row">
+                    <div class="request-label">Notes:</div>
+                    <div class="request-value">Would like to discuss progress on social anxiety techniques</div>
+                </div>
+            </div>
+            <div class="request-actions">
+                <button class="request-btn accept">Accept Request</button>
+                <button class="request-btn decline">Decline Request</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Call Modal -->
+    <div class="video-call-modal" id="videoCallModal">
+        <div class="video-call-container">
+            <div class="video-header">
+                <h3>Video Session with Michael Brown</h3>
+                <button class="video-close" id="closeVideoModal">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <div class="video-content">
+                <div class="remote-video">
+                    <video id="remoteVideo" autoplay playsinline></video>
+                    <div class="remote-user">Michael Brown</div>
+                </div>
+                <div class="local-video">
+                    <video id="localVideo" autoplay playsinline muted></video>
+                </div>
+            </div>
+            <div class="video-controls">
+                <button class="video-control-btn" id="muteBtn">
+                    <i class='bx bx-microphone'></i>
+                </button>
+                <button class="video-control-btn" id="videoToggleBtn">
+                    <i class='bx bx-video'></i>
+                </button>
+                <button class="video-control-btn end-call" id="endVideoCallBtn">
+                    <i class='bx bx-phone-off'></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle sidebar
+        const sidebar = document.getElementById('sidebar');
+        const toggleSidebar = document.getElementById('toggleSidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        toggleSidebar.addEventListener('click', function () {
+            sidebar.classList.add('active');
+        });
+
+        closeSidebar.addEventListener('click', function () {
+            sidebar.classList.remove('active');
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const isClickInsideSidebar = sidebar.contains(event.target);
+            const isClickOnHamburger = toggleSidebar.contains(event.target);
+            
+            if (!isClickInsideSidebar && !isClickOnHamburger && window.innerWidth <= 992) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Patient card selection
+        const patientCards = document.querySelectorAll('.patient-card');
+        patientCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove active class from all cards
+                patientCards.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked card
+                this.classList.add('active');
+                
+                // In a real app, you would load the chat history for this patient
+                const patientName = this.querySelector('h4').textContent;
+                document.querySelector('.chat-user-info h4').textContent = patientName;
+                
+                // Update status
+                const status = this.querySelector('.session-status').textContent;
+                document.querySelector('.chat-user-info p').textContent = status;
+                
+                // Update patient image
+                const patientImg = this.querySelector('img').src;
+                document.querySelector('.chat-user img').src = patientImg;
+            });
+        });
+
+        // Video call functionality
+        const videoCallBtn = document.getElementById('videoCallBtn');
+        const voiceCallBtn = document.getElementById('voiceCallBtn');
+        const endSessionBtn = document.getElementById('endSessionBtn');
+        const videoCallModal = document.getElementById('videoCallModal');
+        const closeVideoModal = document.getElementById('closeVideoModal');
+        const endVideoCallBtn = document.getElementById('endVideoCallBtn');
+        const muteBtn = document.getElementById('muteBtn');
+        const videoToggleBtn = document.getElementById('videoToggleBtn');
+
+        videoCallBtn.addEventListener('click', function() {
+            videoCallModal.classList.add('active');
+            
+            // In a real app, you would initiate the video call connection here
+            // This is just a simulation
+            navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+                .then(stream => {
+                    document.getElementById('localVideo').srcObject = stream;
+                    // Simulate remote video
+                    setTimeout(() => {
+                        document.getElementById('remoteVideo').src = "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4";
+                    }, 1000);
+                })
+                .catch(err => {
+                    console.error("Error accessing media devices:", err);
+                });
+        });
+
+        voiceCallBtn.addEventListener('click', function() {
+            alert("Voice call would be initiated in a real application");
+        });
+
+        endSessionBtn.addEventListener('click', function() {
+            if (confirm("Are you sure you want to end this session?")) {
+                // In a real app, you would end the session and update status
+                const activeCard = document.querySelector('.patient-card.active');
+                activeCard.querySelector('.session-status').textContent = "Completed";
+                activeCard.querySelector('.session-status').className = "session-status status-completed";
+                
+                // Show session ended message
+                const chatMessages = document.querySelector('.chat-messages');
+                const endMessage = document.createElement('div');
+                endMessage.className = "message";
+                endMessage.innerHTML = `
+                    <div class="message-content" style="background: #f0f0f0; color: #666; text-align: center; width: 100%; max-width: 100%;">
+                        Session ended
+                    </div>
+                `;
+                chatMessages.appendChild(endMessage);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Disable chat input
+                document.querySelector('.chat-input input').disabled = true;
+                document.querySelector('.chat-input button').disabled = true;
+            }
+        });
+
+        closeVideoModal.addEventListener('click', function() {
+            videoCallModal.classList.remove('active');
+            // In a real app, you would stop the video streams
+            const localVideo = document.getElementById('localVideo');
+            if (localVideo.srcObject) {
+                localVideo.srcObject.getTracks().forEach(track => track.stop());
+                localVideo.srcObject = null;
+            }
+            document.getElementById('remoteVideo').src = "";
+        });
+
+        endVideoCallBtn.addEventListener('click', function() {
+            videoCallModal.classList.remove('active');
+            // In a real app, you would stop the video streams
+            const localVideo = document.getElementById('localVideo');
+            if (localVideo.srcObject) {
+                localVideo.srcObject.getTracks().forEach(track => track.stop());
+                localVideo.srcObject = null;
+            }
+            document.getElementById('remoteVideo').src = "";
+            
+            // Show call ended message in chat
+            const chatMessages = document.querySelector('.chat-messages');
+            const endMessage = document.createElement('div');
+            endMessage.className = "message";
+            endMessage.innerHTML = `
+                <div class="message-content" style="background: #f0f0f0; color: #666; text-align: center; width: 100%; max-width: 100%;">
+                    Video call ended
+                </div>
+            `;
+            chatMessages.appendChild(endMessage);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+
+        // Mute/unmute functionality
+        let isMuted = false;
+        muteBtn.addEventListener('click', function() {
+            isMuted = !isMuted;
+            this.innerHTML = isMuted ? '<i class="bx bx-microphone-off"></i>' : '<i class="bx bx-microphone"></i>';
+            // In a real app, you would mute/unmute the audio track
+        });
+
+        // Video toggle functionality
+        let isVideoOff = false;
+        videoToggleBtn.addEventListener('click', function() {
+            isVideoOff = !isVideoOff;
+            this.innerHTML = isVideoOff ? '<i class="bx bx-video-off"></i>' : '<i class="bx bx-video"></i>';
+            // In a real app, you would enable/disable the video track
+        });
+
+        // Session request buttons
+        const acceptBtn = document.querySelector('.request-btn.accept');
+        const declineBtn = document.querySelector('.request-btn.decline');
+
+        acceptBtn.addEventListener('click', function() {
+            alert("Session request accepted. The patient will be notified.");
+            // In a real app, you would update the appointment status
+            document.querySelector('.session-request').style.display = 'none';
+        });
+
+        declineBtn.addEventListener('click', function() {
+            if (confirm("Are you sure you want to decline this session request?")) {
+                alert("Session request declined. The patient will be notified.");
+                // In a real app, you would update the appointment status
+                document.querySelector('.session-request').style.display = 'none';
+            }
+        });
+
+        // Chat functionality
+        const chatInput = document.querySelector('.chat-input input');
+        const chatSendBtn = document.querySelector('.chat-input button');
+
+        chatSendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const messageText = chatInput.value.trim();
+            if (messageText) {
+                const chatMessages = document.querySelector('.chat-messages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = "message message-psychologist";
+                
+                const now = new Date();
+                const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                
+                messageDiv.innerHTML = `
+                    <div class="message-content">${messageText}</div>
+                    <div class="message-time">${timeString}</div>
+                `;
+                
+                chatMessages.appendChild(messageDiv);
+                chatInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>

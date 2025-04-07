@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="../css/pyschologist/navbar.css">
+    <link rel="stylesheet" href="../css/pyschologist/pyschologistsettings.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Main Settings Styles */
+        :root {
+            --primary: #5D5FEF;
+            --primary-light: #A5A6F6;
+            --primary-dark: #4B4DCA;
+            --secondary: #6C757D;
+            --success: #4CAF50;
+            --error: #F44336;
+            --accent: #FFD166;
+            --light: #F8F9FA;
+            --dark: #212529;
+            --gray: #6C757D;
+            --border: #e0e0e0;
+        }
+
+        .settings-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .settings-sidebar {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            padding: 20px 0;
+            height: fit-content;
+        }
+
+        .settings-sidebar h3 {
+            padding: 0 20px 15px;
+            font-size: 1.1rem;
+            color: var(--dark);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 15px;
+        }
+
+        .settings-menu {
+            list-style: none;
+        }
+
+        .settings-menu li a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: var(--secondary);
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .settings-menu li a:hover {
+            color: var(--primary);
+            background: rgba(93, 95, 239, 0.05);
+        }
+
+        .settings-menu li a.active {
+            color: var(--primary);
+            background: rgba(93, 95, 239, 0.1);
+            border-left: 3px solid var(--primary);
+        }
+
+        .settings-menu li a i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .settings-content {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+        }
+
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .settings-header h2 {
+            color: var(--dark);
+            font-size: 1.5rem;
+        }
+
+        .settings-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .profile-card {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .profile-avatar {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--primary-light);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-upload {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .avatar-upload input {
+            display: none;
+        }
+
+        .profile-info h3 {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .profile-info p {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--secondary);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(93, 95, 239, 0.1);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: rgba(93, 95, 239, 0.05);
+        }
+
+        .license-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .license-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .license-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .license-status {
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-verified {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--success);
+        }
+
+        .license-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .license-detail span {
+            display: block;
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: var(--secondary);
+        }
+
+        .detail-value {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .file-upload {
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+        }
+
+        .file-upload i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .file-upload p {
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .file-upload span {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .uploaded-files {
+            margin-top: 20px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: var(--light);
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .file-icon {
+            margin-right: 15px;
+            color: var(--primary);
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .file-size {
+            font-size: 0.8rem;
+            color: var(--secondary);
+        }
+
+        .file-delete {
+            color: var(--error);
+            cursor: pointer;
+        }
+
+        /* Security Settings */
+        .security-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .security-info h4 {
+            font-size: 1rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .security-info p {
+            font-size: 0.85rem;
+            color: var(--secondary);
+        }
+
+        /* Notification Settings */
+        .notification-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .notification-info h4 {
+            font-size: 1rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .notification-info p {
+            font-size: 0.85rem;
+            color: var(--secondary);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .settings-container {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-sidebar {
+                display: flex;
+                overflow-x: auto;
+                padding: 15px;
+            }
+
+            .settings-sidebar h3 {
+                display: none;
+            }
+
+            .settings-menu {
+                display: flex;
+                gap: 10px;
+            }
+
+            .settings-menu li a {
+                padding: 8px 15px;
+                white-space: nowrap;
+                border-radius: 6px;
+            }
+
+            .settings-menu li a.active {
+                border-left: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-stats {
+                justify-content: center;
+            }
+
+            .license-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .settings-content {
+                padding: 20px;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar/Navbar -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-sidebar" id="closeSidebar">
+            <i class='bx bx-chevron-left'></i>
+        </button>
+        <div class="sidebar-header">
+            <i class='bx bx-brain icon'></i>
+            <h3>SerenityQ</h3>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="pyschologistdashboard.html">
+                    <i class='bx bx-bar-chart-alt-2 icon'></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="pyschologistappointment.html">
+                    <i class='bx bx-calendar icon'></i>
+                    <span>Appointments</span>
+                </a>
+            </li>
+            <li>
+                <a href="pyschologistSessions.html">
+                    <i class='bx bx-conversation icon'></i>
+                    <span>Sessions</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="pyschologistsettings.html">
+                    <i class='bx bx-cog icon'></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-log-out icon'></i>
+                    <span>Log Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="header">
+            <div style="display: flex; align-items: center;">
+                <button class="hamburger" id="toggleSidebar">
+                    <i class='bx bx-menu'></i>
+                </button>
+                <h1>Settings</h1>
+            </div>
+            <div class="search-box">
+                <i class='bx bx-search search-icon'></i>
+                <input type="text" placeholder="Search settings...">
+            </div>
+            <div class="user-profile">
+                <div class="user-info">
+                    <p>Dr. Sarah Johnson</p>
+                    <small>Clinical Psychologist</small>
+                </div>
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile Photo">
+            </div>
+        </div>
+
+        <div class="settings-container">
+            <!-- Settings Sidebar -->
+            <div class="settings-sidebar">
+                <h3>Settings</h3>
+                <ul class="settings-menu">
+                    <li><a href="#profile" class="active" id="profile-tab"><i class='bx bx-user'></i> Profile</a></li>
+                    <li><a href="#professional" id="professional-tab"><i class='bx bx-briefcase'></i> Professional Info</a></li>
+                    <li><a href="#security" id="security-tab"><i class='bx bx-shield'></i> Security</a></li>
+                    <li><a href="#notifications" id="notifications-tab"><i class='bx bx-bell'></i> Notifications</a></li>
+                    <li><a href="#billing" id="billing-tab"><i class='bx bx-credit-card'></i> Billing</a></li>
+                </ul>
+            </div>
+
+            <!-- Settings Content -->
+            <div class="settings-content">
+                <!-- Profile Section -->
+                <div class="settings-section" id="profile-section">
+                    <div class="settings-header">
+                        <h2><i class='bx bx-user'></i> Profile Settings</h2>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile Photo">
+                            <label class="avatar-upload">
+                                <i class='bx bx-camera'></i>
+                                <input type="file" id="avatar-upload" accept="image/*">
+                            </label>
+                        </div>
+                        <div class="profile-info">
+                            <h3>Dr. Sarah Johnson</h3>
+                            <p>Clinical Psychologist | Member since 2018</p>
+                            <div class="profile-stats">
+                                <div class="stat-item">
+                                    <div class="stat-value">142</div>
+                                    <div class="stat-label">Patients</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">4.9</div>
+                                    <div class="stat-label">Rating</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">98%</div>
+                                    <div class="stat-label">Response</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="profile-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" value="Sarah" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" value="Johnson" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" value="sarah.johnson@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" value="+1 (555) 123-4567">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="bio">Professional Bio</label>
+                                <textarea id="bio">Dr. Sarah Johnson is a licensed clinical psychologist with over 10 years of experience in treating anxiety, depression, and relationship issues. She specializes in cognitive behavioral therapy and mindfulness-based approaches.</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Professional Info Section (Hidden by default) -->
+                <div class="settings-section" id="professional-section" style="display: none;">
+                    <div class="settings-header">
+                        <h2><i class='bx bx-briefcase'></i> Professional Information</h2>
+                    </div>
+
+                    <div class="license-card">
+                        <div class="license-header">
+                            <div class="license-title">Professional License</div>
+                            <div class="license-status status-verified">Verified</div>
+                        </div>
+                        <div class="license-details">
+                            <div class="license-detail">
+                                <span class="detail-label">License Number</span>
+                                <span class="detail-value">PSY-1234567</span>
+                            </div>
+                            <div class="license-detail">
+                                <span class="detail-label">Issuing State</span>
+                                <span class="detail-value">California</span>
+                            </div>
+                            <div class="license-detail">
+                                <span class="detail-label">Expiration Date</span>
+                                <span class="detail-value">June 15, 2025</span>
+                            </div>
+                            <div class="license-detail">
+                                <span class="detail-label">Specialty</span>
+                                <span class="detail-value">Clinical Psychology</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="professional-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="license-number">License Number</label>
+                                <input type="text" id="license-number" value="PSY-1234567" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="license-state">Issuing State</label>
+                                <select id="license-state" required>
+                                    <option value="CA" selected>California</option>
+                                    <option value="NY">New York</option>
+                                    <!-- Other states would be listed here -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="expiration-date">Expiration Date</label>
+                                <input type="date" id="expiration-date" value="2025-06-15" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="primary-specialty">Primary Specialty</label>
+                                <select id="primary-specialty" required>
+                                    <option value="clinical" selected>Clinical Psychology</option>
+                                    <option value="counseling">Counseling Psychology</option>
+                                    <option value="school">School Psychology</option>
+                                    <option value="health">Health Psychology</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Additional Specialties</label>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;">
+                                    <label class="checkbox-container">Anxiety Disorders
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="checkbox-container">Depression
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="checkbox-container">Trauma/PTSD
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="checkbox-container">Relationship Issues
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="checkbox-container">Stress Management
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="years-experience">Years of Experience</label>
+                                <input type="number" id="years-experience" value="10" min="0" max="50" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="hourly-rate">Hourly Rate ($)</label>
+                                <input type="number" id="hourly-rate" value="150" min="50" max="500" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Upload Updated License (if applicable)</label>
+                            <div class="file-upload">
+                                <label for="license-upload">
+                                    <i class='bx bx-cloud-upload'></i>
+                                    <p>Drag & drop your file here or click to browse</p>
+                                    <span>PDF, JPG or PNG (Max 5MB)</span>
+                                    <input type="file" id="license-upload" accept=".pdf,.jpg,.jpeg,.png">
+                                </label>
+                            </div>
+                            <div class="uploaded-files">
+                                <!-- Uploaded files would appear here -->
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Update Professional Info</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Security Section (Hidden by default) -->
+                <div class="settings-section" id="security-section" style="display: none;">
+                    <div class="settings-header">
+                        <h2><i class='bx bx-shield'></i> Security Settings</h2>
+                    </div>
+
+                    <div class="security-item">
+                        <div class="security-info">
+                            <h4>Password</h4>
+                            <p>Last changed 3 months ago</p>
+                        </div>
+                        <button class="btn btn-outline" id="change-password-btn">Change</button>
+                    </div>
+
+                    <div class="security-item">
+                        <div class="security-info">
+                            <h4>Two-Factor Authentication</h4>
+                            <p>Add an extra layer of security to your account</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="security-item">
+                        <div class="security-info">
+                            <h4>Login Activity</h4>
+                            <p>View recent login attempts and devices</p>
+                        </div>
+                        <button class="btn btn-outline">View Activity</button>
+                    </div>
+
+                    <div class="security-item">
+                        <div class="security-info">
+                            <h4>Connected Devices</h4>
+                            <p>2 devices currently active</p>
+                        </div>
+                        <button class="btn btn-outline">Manage Devices</button>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary">Save Security Settings</button>
+                    </div>
+                </div>
+
+                <!-- Notifications Section (Hidden by default) -->
+                <div class="settings-section" id="notifications-section" style="display: none;">
+                    <div class="settings-header">
+                        <h2><i class='bx bx-bell'></i> Notification Preferences</h2>
+                    </div>
+
+                    <h3 class="section-title"><i class='bx bx-envelope'></i> Email Notifications</h3>
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>Appointment Reminders</h4>
+                            <p>Receive reminders about upcoming appointments</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>New Messages</h4>
+                            <p>Get notified when you receive new messages</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>Patient Updates</h4>
+                            <p>Notifications about your patients' progress</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <h3 class="section-title"><i class='bx bx-mobile'></i> Push Notifications</h3>
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>Session Alerts</h4>
+                            <p>Get alerts when sessions are about to start</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="notification-info">
+                            <h4>Urgent Requests</h4>
+                            <p>Immediate notifications for urgent requests</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary">Save Notification Settings</button>
+                    </div>
+                </div>
+
+                <!-- Billing Section (Hidden by default) -->
+                <div class="settings-section" id="billing-section" style="display: none;">
+                    <div class="settings-header">
+                        <h2><i class='bx bx-credit-card'></i> Billing & Payments</h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="billing-email">Billing Email</label>
+                            <input type="email" id="billing-email" value="billing@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="tax-id">Tax ID</label>
+                            <input type="text" id="tax-id" value="12-3456789">
+                        </div>
+                    </div>
+
+                    <h3 class="section-title"><i class='bx bx-credit-card'></i> Payment Methods</h3>
+                    <div class="license-card">
+                        <div class="license-header">
+                            <div class="license-title">Primary Payment Method</div>
+                        </div>
+                        <div class="license-details">
+                            <div class="license-detail">
+                                <span class="detail-label">Card Type</span>
+                                <span class="detail-value">Visa</span>
+                            </div>
+                            <div class="license-detail">
+                                <span class="detail-label">Card Number</span>
+                                <span class="detail-value">•••• •••• •••• 4242</span>
+                            </div>
+                            <div class="license-detail">
+                                <span class="detail-label">Expiration Date</span>
+                                <span class="detail-value">12/2024</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline" style="margin-top: 20px;">
+                        <i class='bx bx-plus'></i> Add Payment Method
+                    </button>
+
+                    <h3 class="section-title"><i class='bx bx-receipt'></i> Billing History</h3>
+                    <p style="margin-bottom: 20px;">View and download your past invoices and receipts</p>
+                    <button class="btn btn-outline">
+                        <i class='bx bx-history'></i> View Billing History
+                    </button>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary">Update Billing Info</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle sidebar
+        const sidebar = document.getElementById('sidebar');
+        const toggleSidebar = document.getElementById('toggleSidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+
+        toggleSidebar.addEventListener('click', function () {
+            sidebar.classList.add('active');
+        });
+
+        closeSidebar.addEventListener('click', function () {
+            sidebar.classList.remove('active');
+        });
+
+        // Settings tabs functionality
+        const tabs = document.querySelectorAll('.settings-menu li a');
+        const sections = document.querySelectorAll('.settings-section');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all sections
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show the selected section
+                const sectionId = this.getAttribute('href').substring(1) + '-section';
+                document.getElementById(sectionId).style.display = 'block';
+            });
+        });
+
+        // Avatar upload functionality
+        const avatarUpload = document.getElementById('avatar-upload');
+        const profileAvatar = document.querySelector('.profile-avatar img');
+
+        avatarUpload.addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    profileAvatar.src = event.target.result;
+                };
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+
+        // Form submission
+        document.getElementById('profile-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Profile updated successfully!');
+            // In a real app, you would send this data to your backend
+        });
+
+        document.getElementById('professional-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Professional information updated successfully!');
+            // In a real app, you would send this data to your backend
+        });
+
+        // Change password button
+        document.getElementById('change-password-btn').addEventListener('click', function() {
+            const newPassword = prompt('Enter your new password:');
+            if (newPassword) {
+                alert('Password changed successfully!');
+                // In a real app, you would validate and update the password
+            }
+        });
+
+        // File upload functionality for license
+        const licenseUpload = document.getElementById('license-upload');
+        const uploadedFiles = document.querySelector('.uploaded-files');
+
+        licenseUpload.addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const file = e.target.files[0];
+                const fileSize = formatFileSize(file.size);
+                
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <i class='bx bx-file file-icon'></i>
+                    <div class="file-info">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-size">${fileSize}</div>
+                    </div>
+                    <i class='bx bx-trash file-delete'></i>
+                `;
+                
+                // Add delete functionality
+                const deleteBtn = fileItem.querySelector('.file-delete');
+                deleteBtn.addEventListener('click', function() {
+                    fileItem.remove();
+                    licenseUpload.value = '';
+                });
+                
+                uploadedFiles.appendChild(fileItem);
+            }
+        });
+
+        // Helper function to format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Initialize the page with profile section visible
+        document.getElementById('profile-section').style.display = 'block';
+    </script>
+</body>
+</html>
