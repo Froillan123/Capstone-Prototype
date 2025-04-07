@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Management | SerenityQ Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="admin_style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-left">SerenityQ</div>
+    <ul class="navbar-center">
+      <li><a href="admin_index.html">Dashboard</a></li>
+      <li><a href="admin_therapist.html">Therapists</a></li>
+      <li class="active"><a href="admin_users.html">Users</a></li>
+    </ul>
+    <div class="navbar-right">
+      <div class="dropdown">
+        <button class="dropbtn">Profile ⏷</button>
+        <div class="dropdown-content">
+            <a href="admin_profile.html">Profile</a>
+            <a href="#">Settings</a>
+            <a href="#">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <section class="hero light-hero">
+    <h1>User (Patient) Management Panel</h1>
+    <p>View, add, edit, or remove patient profiles from the SerenityQ system.</p>
+    <button class="cta-btn" onclick="alert('Open Add User Modal')">+ Add New User</button>
+  </section>
+
+  <!-- User Table -->
+  <section class="section-table">
+    <h2>Registered Users</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sophia Turner</td>
+            <td>29</td>
+            <td>sophia@serenityq.com</td>
+            <td>
+              <button class="edit-btn">Edit</button>
+              <button class="delete-btn">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>David Brooks</td>
+            <td>35</td>
+            <td>david@serenityq.com</td>
+            <td>
+              <button class="edit-btn">Edit</button>
+              <button class="delete-btn">Delete</button>
+            </td>
+          </tr>
+          <!-- Add more user rows as needed -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</body>
+</html>
