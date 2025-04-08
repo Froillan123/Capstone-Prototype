@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Generate therapist data (500 therapists)
+    const therapists = generateTherapists(500);
+    
     // Initialize Swiper
     const therapistSwiper = new Swiper('.therapistSwiper', {
         slidesPerView: 1,
@@ -23,209 +26,71 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Therapist data for modals
-    const therapists = {
-        1: {
-            name: "Dr. Sarah Johnson",
-            img: "https://randomuser.me/api/portraits/women/44.jpg",
-            specialty: "Clinical Psychologist",
-            status: "Online",
-            experience: "15 years",
-            rating: "4.9 ★ (128 reviews)",
-            about: "Dr. Johnson specializes in cognitive behavioral therapy for anxiety and depression. She has helped hundreds of patients regain control of their lives through evidence-based treatments.",
-            specializations: ["Anxiety Disorders", "Depression", "Stress Management", "Self-Esteem Issues"],
-            availability: ["10:00 AM", "1:00 PM", "3:00 PM", "4:30 PM"],
-            reviews: [
-                {
-                    author: "Jessica T.",
-                    rating: "★★★★★",
-                    date: "2 weeks ago",
-                    content: "Dr. Johnson changed my life. Her approach to CBT made so much sense and I've seen tremendous progress in just 3 months."
-                },
-                {
-                    author: "Michael R.",
-                    rating: "★★★★★",
-                    date: "1 month ago",
-                    content: "Very professional and empathetic. She creates a safe space to discuss difficult topics."
-                }
-            ]
-        },
-        2: {
-            name: "Dr. Michael Chen",
-            img: "https://randomuser.me/api/portraits/men/32.jpg",
-            specialty: "Cognitive Behavioral Therapist",
-            status: "In Session",
-            experience: "8 years",
-            rating: "4.8 ★ (92 reviews)",
-            about: "Dr. Chen focuses on exposure therapy for OCD and trauma-related disorders. He combines traditional CBT with mindfulness techniques for comprehensive care.",
-            specializations: ["OCD", "PTSD", "Phobias", "Anxiety"],
-            availability: ["2:00 PM", "5:00 PM"],
-            reviews: [
-                {
-                    author: "David L.",
-                    rating: "★★★★★",
-                    date: "3 weeks ago",
-                    content: "Dr. Chen's approach to my OCD has been life-changing. I finally feel in control of my thoughts."
-                },
-                {
-                    author: "Sarah K.",
-                    rating: "★★★★☆",
-                    date: "2 months ago",
-                    content: "Very knowledgeable about trauma responses. The sessions can be intense but extremely helpful."
-                }
-            ]
-        },
-        3: {
-            name: "Dr. Amina Patel",
-            img: "https://randomuser.me/api/portraits/women/68.jpg",
-            specialty: "Child Psychologist",
-            status: "Offline",
-            experience: "12 years",
-            rating: "4.7 ★ (156 reviews)",
-            about: "Dr. Patel specializes in play therapy and family counseling for children and adolescents. She believes in a holistic approach that involves the entire family in the healing process.",
-            specializations: ["ADHD", "Autism Spectrum", "Childhood Anxiety", "Behavioral Issues"],
-            availability: ["9:30 AM", "11:00 AM", "1:30 PM", "3:00 PM"],
-            reviews: [
-                {
-                    author: "Parent of Emma (age 8)",
-                    rating: "★★★★★",
-                    date: "1 month ago",
-                    content: "My daughter looks forward to her sessions with Dr. Patel. We've seen huge improvements in her anxiety at school."
-                },
-                {
-                    author: "James H.",
-                    rating: "★★★★★",
-                    date: "2 months ago",
-                    content: "Dr. Patel helped our family understand our son's ADHD better and gave us practical strategies."
-                }
-            ]
-        },
-        4: {
-            name: "Dr. Robert Williams",
-            img: "https://randomuser.me/api/portraits/men/75.jpg",
-            specialty: "Marriage Counselor",
-            status: "Online",
-            experience: "10 years",
-            rating: "4.8 ★ (112 reviews)",
-            about: "Dr. Williams specializes in couples therapy and family dynamics. His approach focuses on improving communication and rebuilding trust in relationships.",
-            specializations: ["Couples Therapy", "Family Counseling", "Relationship Issues", "Divorce Counseling"],
-            availability: ["9:00 AM", "12:00 PM", "4:00 PM"],
-            reviews: [
-                {
-                    author: "Mark & Susan",
-                    rating: "★★★★★",
-                    date: "3 weeks ago",
-                    content: "Saved our marriage. We were on the brink of divorce and Dr. Williams helped us reconnect."
-                },
-                {
-                    author: "Lisa P.",
-                    rating: "★★★★☆",
-                    date: "1 month ago",
-                    content: "Very insightful sessions. He helps you see patterns in your relationship you didn't notice before."
-                }
-            ]
-        },
-        5: {
-            name: "Dr. Emily Zhang",
-            img: "https://randomuser.me/api/portraits/women/33.jpg",
-            specialty: "Neuropsychologist",
-            status: "Online",
-            experience: "7 years",
-            rating: "4.9 ★ (87 reviews)",
-            about: "Dr. Zhang focuses on neurodevelopmental disorders and cognitive rehabilitation. She uses evidence-based techniques to help patients improve executive functioning and emotional regulation.",
-            specializations: ["ADHD", "Autism Spectrum", "Learning Disabilities", "Brain Injury Rehabilitation"],
-            availability: ["12:30 PM", "3:30 PM", "5:30 PM"],
-            reviews: [
-                {
-                    author: "Thomas R.",
-                    rating: "★★★★★",
-                    date: "2 weeks ago",
-                    content: "Dr. Zhang's strategies for managing my ADHD have been incredibly effective. I'm more productive than ever."
-                },
-                {
-                    author: "Parent of Noah (age 10)",
-                    rating: "★★★★★",
-                    date: "1 month ago",
-                    content: "She has a special way of connecting with children. My son's school performance has improved dramatically."
-                }
-            ]
-        },
-        6: {
-            name: "Dr. David Wilson",
-            img: "https://randomuser.me/api/portraits/men/55.jpg",
-            specialty: "Trauma Specialist",
-            status: "In Session",
-            experience: "14 years",
-            rating: "4.7 ★ (143 reviews)",
-            about: "Dr. Wilson specializes in trauma-focused therapies including EMDR and prolonged exposure. He works with patients who have experienced various forms of trauma to process their experiences and regain control of their lives.",
-            specializations: ["PTSD", "Trauma", "EMDR Therapy", "Anxiety Disorders"],
-            availability: ["8:30 AM", "11:00 AM", "4:00 PM"],
-            reviews: [
-                {
-                    author: "Veteran (anonymous)",
-                    rating: "★★★★★",
-                    date: "3 weeks ago",
-                    content: "After years of struggling with PTSD, Dr. Wilson's EMDR therapy has given me my life back."
-                },
-                {
-                    author: "Maria G.",
-                    rating: "★★★★★",
-                    date: "2 months ago",
-                    content: "I was skeptical about trauma therapy, but Dr. Wilson made me feel safe and understood throughout the process."
-                }
-            ]
-        }
-    };
+    // Render therapists
+    renderTherapists(therapists);
+
+    // Filter therapists
+    document.getElementById('specialtyFilter').addEventListener('change', filterTherapists);
+    document.getElementById('availabilityFilter').addEventListener('change', filterTherapists);
+    document.getElementById('experienceFilter').addEventListener('change', filterTherapists);
 
     // Modal functionality
-    const modal = document.getElementById('therapistModal');
+    const therapistModal = document.getElementById('therapistModal');
     const bookingModal = document.getElementById('bookingModal');
-    const viewButtons = document.querySelectorAll('.view-btn');
-    const bookButtons = document.querySelectorAll('.book-btn');
     const closeModalButtons = document.querySelectorAll('.close-modal');
-    const modalBookBtn = document.getElementById('modalBookBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const bookSessionBtn = document.getElementById('bookSessionBtn');
     const cancelBookingBtn = document.getElementById('cancelBookingBtn');
     const confirmBookingBtn = document.getElementById('confirmBookingBtn');
     let currentTherapist = null;
 
-    // View Profile Button Click
-    viewButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const therapistId = this.getAttribute('data-therapist');
-            currentTherapist = therapists[therapistId];
-            openTherapistModal(currentTherapist);
-        });
-    });
-
-    // Book Session Button Click (from card)
-    bookButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const therapistName = this.getAttribute('data-therapist');
-            currentTherapist = Object.values(therapists).find(t => t.name === therapistName);
-            openBookingModal(currentTherapist);
-        });
-    });
-
-    // Book Session Button Click (from modal)
-    modalBookBtn.addEventListener('click', function() {
-        openBookingModal(currentTherapist);
-        modal.style.display = 'none';
-    });
-
-    // Close Modal Buttons
+    // Close modals
     closeModalButtons.forEach(button => {
         button.addEventListener('click', function() {
-            modal.style.display = 'none';
+            therapistModal.style.display = 'none';
             bookingModal.style.display = 'none';
         });
     });
 
-    // Cancel Booking Button
+    closeModalBtn.addEventListener('click', function() {
+        therapistModal.style.display = 'none';
+    });
+
     cancelBookingBtn.addEventListener('click', function() {
         bookingModal.style.display = 'none';
     });
 
-    // Confirm Booking Button
+    // Close modals when clicking outside
+    window.addEventListener('click', function(event) {
+        if (event.target === therapistModal) {
+            therapistModal.style.display = 'none';
+        }
+        if (event.target === bookingModal) {
+            bookingModal.style.display = 'none';
+        }
+    });
+
+    // Date change handler for booking modal
+    document.getElementById('sessionDate')?.addEventListener('change', function() {
+        const date = this.value;
+        const timeSelect = document.getElementById('sessionTime');
+        
+        // Clear previous options
+        timeSelect.innerHTML = '<option value="">-- Select a time slot --</option>';
+        
+        if (date && currentTherapist) {
+            // In a real app, you would fetch available times from your backend
+            // Here we're just using the therapist's general availability
+            currentTherapist.availability.forEach(time => {
+                const option = document.createElement('option');
+                option.value = time;
+                option.textContent = time;
+                timeSelect.appendChild(option);
+            });
+        }
+    });
+
+    // Confirm booking
     confirmBookingBtn.addEventListener('click', function() {
         const date = document.getElementById('sessionDate').value;
         const time = document.getElementById('sessionTime').value;
@@ -246,66 +111,85 @@ document.addEventListener('DOMContentLoaded', function() {
         bookingModal.style.display = 'none';
     });
 
-    // Close modals when clicking outside
-    window.addEventListener('click', function(event) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-        if (event.target === bookingModal) {
-            bookingModal.style.display = 'none';
-        }
-    });
+    // Therapist card click handlers are added in renderTherapists function
 
-    // Date change handler for booking modal
-    document.getElementById('sessionDate')?.addEventListener('change', function() {
-        const date = this.value;
-        const timeSelect = document.getElementById('sessionTime');
+    // Helper functions
+    function renderTherapists(therapists) {
+        const container = document.getElementById('therapistContainer');
+        container.innerHTML = '';
         
-        // Clear previous options
-        timeSelect.innerHTML = '<option value="">-- Select a time slot --</option>';
+        therapists.forEach(therapist => {
+            const slide = document.createElement('div');
+            slide.className = 'swiper-slide';
+            
+            slide.innerHTML = `
+                <div class="therapist-card">
+                    <img src="${therapist.img}" alt="${therapist.name}" class="therapist-img">
+                    <h3 class="therapist-name">${therapist.name}</h3>
+                    <p class="therapist-specialty">${therapist.specialty}</p>
+                    <span class="therapist-status ${getStatusClass(therapist.status)}">${therapist.status}</span>
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary view-btn" data-id="${therapist.id}">View Profile</button>
+                        <button class="btn btn-primary book-btn" data-id="${therapist.id}">Book Now</button>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(slide);
+        });
         
-        if (date) {
-            // In a real app, you would fetch available times from your backend
-            // Here we're just using the therapist's general availability
-            currentTherapist.availability.forEach(time => {
-                const option = document.createElement('option');
-                option.value = time;
-                option.textContent = time;
-                timeSelect.appendChild(option);
+        // Add event listeners to the new buttons
+        document.querySelectorAll('.view-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const therapistId = parseInt(this.getAttribute('data-id'));
+                currentTherapist = therapists.find(t => t.id === therapistId);
+                openTherapistModal(currentTherapist);
             });
-        }
-    });
-
+        });
+        
+        document.querySelectorAll('.book-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const therapistId = parseInt(this.getAttribute('data-id'));
+                currentTherapist = therapists.find(t => t.id === therapistId);
+                openBookingModal(currentTherapist);
+            });
+        });
+        
+        // Update Swiper after adding new slides
+        therapistSwiper.update();
+    }
+    
     function openTherapistModal(therapist) {
         document.getElementById('modalTherapistImg').src = therapist.img;
         document.getElementById('modalTherapistName').textContent = therapist.name;
         document.getElementById('modalTherapistSpecialty').textContent = therapist.specialty;
         document.getElementById('modalTherapistAbout').textContent = therapist.about;
+        document.getElementById('modalTherapistExperience').textContent = therapist.experience;
+        document.getElementById('modalTherapistRating').textContent = therapist.rating;
         
-        // Set status badge
-        const statusBadge = document.getElementById('modalTherapistStatus');
-        statusBadge.textContent = therapist.status;
-        statusBadge.className = 'status-badge ' + 
-            (therapist.status === 'Online' ? 'badge-online' : 
-             therapist.status === 'In Session' ? 'badge-busy' : 'badge-offline');
+        // Set status
+        const statusElement = document.getElementById('modalTherapistStatus');
+        statusElement.textContent = therapist.status;
+        statusElement.className = 'therapist-status ' + getStatusClass(therapist.status);
         
         // Set specializations
-        const specializationsList = document.getElementById('modalTherapistSpecializations');
-        specializationsList.innerHTML = '';
+        const specializationsContainer = document.getElementById('modalTherapistSpecializations');
+        specializationsContainer.innerHTML = '';
         therapist.specializations.forEach(spec => {
-            const li = document.createElement('li');
-            li.textContent = spec;
-            specializationsList.appendChild(li);
+            const span = document.createElement('span');
+            span.className = 'specialization';
+            span.textContent = spec;
+            specializationsContainer.appendChild(span);
         });
         
         // Set availability
-        const availabilitySlots = document.getElementById('modalTherapistAvailability');
-        availabilitySlots.innerHTML = '';
+        const availabilityContainer = document.getElementById('modalTherapistAvailability');
+        availabilityContainer.innerHTML = '';
         therapist.availability.forEach(slot => {
             const div = document.createElement('div');
             div.className = 'slot';
             div.textContent = slot;
-            availabilitySlots.appendChild(div);
+            availabilityContainer.appendChild(div);
         });
         
         // Set reviews
@@ -326,12 +210,12 @@ document.addEventListener('DOMContentLoaded', function() {
             rating.className = 'review-rating';
             rating.textContent = review.rating;
             
-            const date = document.createElement('span');
-            date.className = 'review-date';
-            date.textContent = review.date;
-            
             header.appendChild(author);
             header.appendChild(rating);
+            
+            const date = document.createElement('div');
+            date.className = 'review-date';
+            date.textContent = review.date;
             
             const content = document.createElement('div');
             content.className = 'review-content';
@@ -344,11 +228,160 @@ document.addEventListener('DOMContentLoaded', function() {
             reviewsContainer.appendChild(reviewDiv);
         });
         
-        modal.style.display = 'block';
+        therapistModal.style.display = 'block';
     }
-
+    
     function openBookingModal(therapist) {
         document.getElementById('bookingTherapistName').textContent = therapist.name;
         bookingModal.style.display = 'block';
+    }
+    
+    function filterTherapists() {
+        const specialtyFilter = document.getElementById('specialtyFilter').value;
+        const availabilityFilter = document.getElementById('availabilityFilter').value;
+        const experienceFilter = document.getElementById('experienceFilter').value;
+        
+        let filtered = [...therapists];
+        
+        if (specialtyFilter) {
+            filtered = filtered.filter(t => t.specialtyKey === specialtyFilter);
+        }
+        
+        if (availabilityFilter) {
+            if (availabilityFilter === 'online') {
+                filtered = filtered.filter(t => t.status === 'Online');
+            } else if (availabilityFilter === 'today') {
+                filtered = filtered.filter(t => t.availableToday);
+            } else if (availabilityFilter === 'week') {
+                filtered = filtered.filter(t => t.availableThisWeek);
+            }
+        }
+        
+        if (experienceFilter) {
+            const minExperience = parseInt(experienceFilter);
+            filtered = filtered.filter(t => parseInt(t.experience) >= minExperience);
+        }
+        
+        renderTherapists(filtered);
+    }
+    
+    function getStatusClass(status) {
+        return status === 'Online' ? 'status-online' : 
+               status === 'In Session' ? 'status-busy' : 'status-offline';
+    }
+    
+    function generateTherapists(count) {
+        const firstNames = ['Emma', 'Liam', 'Olivia', 'Noah', 'Ava', 'William', 'Sophia', 'James', 'Isabella', 'Oliver', 
+                           'Charlotte', 'Elijah', 'Amelia', 'Benjamin', 'Mia', 'Lucas', 'Harper', 'Mason', 'Evelyn', 'Logan',
+                           'Abigail', 'Alexander', 'Emily', 'Ethan', 'Elizabeth', 'Jacob', 'Mila', 'Michael', 'Ella', 'Daniel',
+                           'Avery', 'Henry', 'Sofia', 'Jackson', 'Camila', 'Sebastian', 'Aria', 'Aiden', 'Scarlett', 'Matthew',
+                           'Victoria', 'Samuel', 'Madison', 'David', 'Luna', 'Joseph', 'Grace', 'Carter', 'Chloe', 'Owen', 'Penelope'];
+        
+        const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez',
+                          'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin',
+                          'Lee', 'Perez', 'Thompson', 'White', 'Harris', 'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson',
+                          'Walker', 'Young', 'Allen', 'King', 'Wright', 'Scott', 'Torres', 'Nguyen', 'Hill', 'Flores',
+                          'Green', 'Adams', 'Nelson', 'Baker', 'Hall', 'Rivera', 'Campbell', 'Mitchell', 'Carter', 'Roberts'];
+        
+        const specialties = [
+            {name: 'Clinical Psychologist', key: 'clinical'},
+            {name: 'Counseling Psychologist', key: 'counseling'},
+            {name: 'School Psychologist', key: 'school'},
+            {name: 'Health Psychologist', key: 'health'},
+            {name: 'Child/Adolescent Psychologist', key: 'child'},
+            {name: 'Neuropsychologist', key: 'neuro'},
+            {name: 'Forensic Psychologist', key: 'forensic'},
+            {name: 'Industrial-Organizational Psychologist', key: 'io'}
+        ];
+        
+        const specializations = {
+            clinical: ['Anxiety Disorders', 'Depression', 'Bipolar Disorder', 'Schizophrenia', 'Personality Disorders'],
+            counseling: ['Life Transitions', 'Relationship Issues', 'Grief Counseling', 'Career Counseling', 'Stress Management'],
+            school: ['Learning Disabilities', 'ADHD', 'Autism Spectrum', 'Behavioral Issues', 'Educational Assessments'],
+            health: ['Chronic Illness', 'Pain Management', 'Health Behavior Change', 'Psychosomatic Disorders', 'Rehabilitation'],
+            child: ['Childhood Anxiety', 'Behavioral Disorders', 'Developmental Disorders', 'Parenting Support', 'School Refusal'],
+            neuro: ['Brain Injury', 'Dementia', 'Cognitive Disorders', 'Memory Problems', 'Stroke Recovery'],
+            forensic: ['Criminal Behavior', 'Competency Evaluations', 'Child Custody', 'Violence Risk Assessment', 'Trauma'],
+            io: ['Workplace Stress', 'Leadership Development', 'Team Building', 'Organizational Change', 'Career Development']
+        };
+        
+        const statuses = ['Online', 'In Session', 'Offline'];
+        
+        const therapists = [];
+        
+        for (let i = 1; i <= count; i++) {
+            const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+            const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+            const name = `Dr. ${firstName} ${lastName}`;
+            const gender = Math.random() > 0.5 ? 'women' : 'men';
+            const img = `https://randomuser.me/api/portraits/${gender}/${Math.floor(Math.random() * 100)}.jpg`;
+            
+            const specialty = specialties[Math.floor(Math.random() * specialties.length)];
+            const experience = Math.floor(Math.random() * 25) + 1;
+            const rating = (4 + Math.random()).toFixed(1);
+            const reviewCount = Math.floor(Math.random() * 200) + 10;
+            const status = statuses[Math.floor(Math.random() * statuses.length)];
+            const availableToday = Math.random() > 0.3;
+            const availableThisWeek = Math.random() > 0.1;
+            
+            // Generate availability slots
+            const availability = [];
+            const baseHour = 9 + Math.floor(Math.random() * 4); // Start between 9am-12pm
+            const slotCount = 3 + Math.floor(Math.random() * 4); // 3-6 slots
+            
+            for (let j = 0; j < slotCount; j++) {
+                const hour = baseHour + (j * 2);
+                if (hour < 18) { // Don't go past 6pm
+                    const time = `${hour > 12 ? hour - 12 : hour}:00 ${hour >= 12 ? 'PM' : 'AM'}`;
+                    availability.push(time);
+                }
+            }
+            
+            // Generate reviews
+            const reviews = [];
+            const reviewCountToShow = Math.min(3, Math.floor(Math.random() * 5) + 1);
+            const reviewAuthors = ['Patient', 'Anonymous', 'Client', 'Parent of Patient', 'Family Member'];
+            
+            for (let j = 0; j < reviewCountToShow; j++) {
+                const stars = Math.floor(Math.random() * 2) + 4; // 4 or 5 stars
+                const author = `${reviewAuthors[Math.floor(Math.random() * reviewAuthors.length)]}`;
+                const monthsAgo = Math.floor(Math.random() * 12) + 1;
+                const content = [
+                    'Very professional and caring approach.',
+                    'Made me feel comfortable from the first session.',
+                    'Has helped me tremendously with my issues.',
+                    'Knowledgeable and patient with my child.',
+                    'Provided excellent tools to manage my condition.',
+                    'Would highly recommend to anyone seeking help.',
+                    'The best therapist I\'ve ever worked with.'
+                ][Math.floor(Math.random() * 7)];
+                
+                reviews.push({
+                    author: author,
+                    rating: '★'.repeat(stars),
+                    date: `${monthsAgo} month${monthsAgo > 1 ? 's' : ''} ago`,
+                    content: content
+                });
+            }
+            
+            therapists.push({
+                id: i,
+                name: name,
+                img: img,
+                specialty: specialty.name,
+                specialtyKey: specialty.key,
+                experience: `${experience} year${experience > 1 ? 's' : ''}`,
+                rating: `${rating} ★ (${reviewCount} reviews)`,
+                status: status,
+                availableToday: availableToday,
+                availableThisWeek: availableThisWeek,
+                about: `${name} is a ${specialty.name.toLowerCase()} with ${experience} years of experience specializing in ${specializations[specialty.key][0].toLowerCase()} and ${specializations[specialty.key][1].toLowerCase()}. ${gender === 'women' ? 'She' : 'He'} takes a ${['compassionate', 'evidence-based', 'holistic', 'client-centered', 'integrative'][Math.floor(Math.random() * 5)]} approach to therapy.`,
+                specializations: specializations[specialty.key],
+                availability: availability,
+                reviews: reviews
+            });
+        }
+        
+        return therapists;
     }
 });

@@ -143,1295 +143,1127 @@
 
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SerenityQ AI</title>
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/userdashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
 
+     <!-- Header with Navigation -->
+     <header class="header">
+        <a href="#" class="logo">
+            <i class="fas fa-brain"></i>
+            SerenityQ
+        </a>
+        
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <nav class="navbar">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="ai.html" class="nav-link active"><i class="fas fa-robot"></i> SerenityQ AI</a></li>
+                <li><a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> Statistics</a></li>
+                <li><a href="appointment.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+                <li><a href="therapist.html" class="nav-link"><i class="fas fa-user-md"></i> Therapists</a></li>
+                <li><a href="booking-history.html" class="nav-link"><i class="fas fa-history"></i> Booking History</a></li>
+                <li><a href="sessions.html" class="nav-link"><i class="fas fa-clock"></i> Sessions</a></li>
+            </ul>
+            
+            <div class="profile">
+                <span class="profile-name">Sarah</span>
+                <img src="https://randomuser.me/api/portraits/women/45.jpg" class="profile-img" alt="Profile">
+                <div class="dropdown-menu">
+                    <a href="user-profile.html" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
+                    <a href="notifications.html" class="dropdown-item"><i class="fas fa-bell"></i> Notifications</a>
+                    <div class="divider"></div>
+                    <a href="#" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+
+    
+
+    <script>
+         // Simple script for calendar navigation (for prototype only)
+         document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // In a real implementation, this would update the calendar
+                alert('Calendar navigation would update the displayed month in a real implementation');
+            });
+        });
+
+        // Today button functionality
+        document.querySelector('.btn-outline').addEventListener('click', () => {
+            // Scroll to today's date
+            const currentDay = document.querySelector('.current-day');
+            currentDay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Highlight current day temporarily
+            currentDay.style.backgroundColor = 'var(--accent)';
+            setTimeout(() => {
+                currentDay.style.backgroundColor = 'var(--primary)';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
+
+:root {
+    --primary: #5D5FEF;
+    --primary-light: #8B8DF2;
+    --secondary: #FF7E5F;
+    --accent: #FFD166;
+    --light: #F7F9FC;
+    --dark: #2B2D42;
+    --gray: #8D99AE;
+    --success: #4CAF50;
+    --error: #F44336;
+    --modal-bg: rgba(0, 0, 0, 0.5);
+}
+
+
+In main content make an AI chat and make it look good do not erase the code just put the style of main content of the AI and for example I chat the AI for my symptoms and I want to book a pyschologist for example and then he ask such price range of the pyschologist and what is the preferences of the user and then when it's done it will loading and the AI find the best match to his preferences and then he can see the person pyschologist and the star rating and name and his specialty and then if i click view all the information of the pyschologist and he can now book a session or appointment- this should be static for now
+
+
+
+Now this is my Registration on my Pyschologist
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>User Management | SerenityQ Admin</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary: #5D5FEF;
-      --primary-light: #A5A6F6;
-      --primary-dark: #4B4DCA;
-      --secondary: #6C757D;
-      --success: #4CAF50;
-      --warning: #FFC107;
-      --error: #F44336;
-      --accent: #FFD166;
-      --light: #F8F9FA;
-      --dark: #212529;
-      --gray: #6C757D;
-      --border: #e0e0e0;
-      --sidebar-width: 260px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: #f5f7fb;
-      color: var(--dark);
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* Sidebar Styles */
-    .sidebar {
-      width: var(--sidebar-width);
-      background: white;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-      z-index: 100;
-      overflow-y: auto;
-    }
-
-    .sidebar-header {
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .sidebar-header h3 {
-      color: var(--primary);
-      margin-left: 10px;
-      font-size: 1.3rem;
-    }
-
-    .sidebar-header i {
-      font-size: 1.8rem;
-      color: var(--primary);
-    }
-
-    .sidebar-menu {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .sidebar-menu li a {
-      display: flex;
-      align-items: center;
-      padding: 15px 20px;
-      color: var(--secondary);
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-
-    .sidebar-menu li a:hover {
-      background-color: rgba(93, 95, 239, 0.1);
-      color: var(--primary);
-    }
-
-    .sidebar-menu li a.active {
-      background-color: rgba(93, 95, 239, 0.1);
-      color: var(--primary);
-      border-left: 3px solid var(--primary);
-    }
-
-    .sidebar-menu li a i {
-      margin-right: 10px;
-      font-size: 1.2rem;
-    }
-
-    /* Main Content Styles */
-    .main-content {
-      flex: 1;
-      margin-left: var(--sidebar-width);
-      transition: all 0.3s ease;
-    }
-
-    /* Navbar Styles */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-    }
-
-    .navbar-left {
-      display: flex;
-      align-items: center;
-    }
-
-    .hamburger {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: var(--primary);
-      cursor: pointer;
-      margin-right: 15px;
-      display: none;
-    }
-
-    .user-profile {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .user-info {
-      display: flex;
-      flex-direction: column;
-      text-align: right;
-    }
-
-    .user-info p {
-      font-weight: 600;
-    }
-
-    .user-info small {
-      color: var(--gray);
-      font-size: 0.8rem;
-    }
-
-    .user-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--primary-light);
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 30px;
-      background: white;
-      margin: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .hero h1 {
-      color: var(--primary);
-      margin-bottom: 10px;
-      font-size: 1.8rem;
-    }
-
-    .hero p {
-      color: var(--secondary);
-      margin-bottom: 20px;
-    }
-
-    .cta-btn {
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s;
-    }
-
-    .cta-btn:hover {
-      background-color: var(--primary-dark);
-    }
-
-    /* Table Section */
-    .section-table {
-      padding: 0 30px 30px;
-    }
-
-    .section-table h2 {
-      margin-bottom: 20px;
-      color: var(--dark);
-    }
-
-    .table-container {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      overflow: hidden;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      padding: 15px;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-
-    th {
-      background-color: var(--light);
-      font-weight: 600;
-      color: var(--dark);
-    }
-
-    tr:hover {
-      background-color: rgba(93, 95, 239, 0.05);
-    }
-
-    .action-btn {
-      padding: 5px 10px;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
-      font-size: 0.8rem;
-      font-weight: 600;
-      transition: all 0.3s;
-      margin-right: 5px;
-    }
-
-    .view-btn {
-      background-color: var(--primary-light);
-      color: var(--primary-dark);
-    }
-
-    .view-btn:hover {
-      background-color: var(--primary);
-      color: white;
-    }
-
-    .edit-btn {
-      background-color: rgba(255, 193, 7, 0.1);
-      color: var(--warning);
-    }
-
-    .edit-btn:hover {
-      background-color: var(--warning);
-      color: white;
-    }
-
-    .delete-btn {
-      background-color: rgba(244, 67, 54, 0.1);
-      color: var(--error);
-    }
-
-    .delete-btn:hover {
-      background-color: var(--error);
-      color: white;
-    }
-
-    /* Modal Styles */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background-color: white;
-      width: 90%;
-      max-width: 600px;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    .modal-header {
-      padding: 20px;
-      background-color: var(--primary);
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-header h3 {
-      margin: 0;
-    }
-
-    .close-modal {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    .modal-body {
-      padding: 20px;
-    }
-
-    .profile-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .profile-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 20px;
-      border: 3px solid var(--primary-light);
-    }
-
-    .profile-info h3 {
-      margin: 0 0 5px;
-      color: var(--dark);
-    }
-
-    .profile-info p {
-      margin: 0;
-      color: var(--secondary);
-    }
-
-    .detail-row {
-      display: flex;
-      margin-bottom: 15px;
-    }
-
-    .detail-label {
-      width: 150px;
-      font-weight: 600;
-      color: var(--dark);
-    }
-
-    .detail-value {
-      flex: 1;
-      color: var(--secondary);
-    }
-
-    .detail-value input, .detail-value select {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid var(--border);
-      border-radius: 5px;
-    }
-
-    .modal-footer {
-      padding: 15px 20px;
-      background-color: var(--light);
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-    }
-
-    /* Confirmation Modal */
-    .confirmation-modal .modal-content {
-      max-width: 500px;
-    }
-
-    .confirmation-body {
-      text-align: center;
-      padding: 30px;
-    }
-
-    .confirmation-body i {
-      font-size: 3rem;
-      color: var(--error);
-      margin-bottom: 20px;
-    }
-
-    .confirmation-body h3 {
-      margin-bottom: 10px;
-    }
-
-    .confirmation-body p {
-      margin-bottom: 20px;
-      color: var(--secondary);
-    }
-
-    /* Loader Styles */
-    .loader-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(255, 255, 255, 0.9);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .dna-loader {
-      width: 100px;
-      height: 100px;
-      position: relative;
-    }
-
-    .dna-loader span {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: var(--primary);
-      border-radius: 50%;
-      animation: dna 1s infinite ease-in-out;
-    }
-
-    .dna-loader span:nth-child(1) {
-      left: 0;
-      top: 0;
-      animation-delay: 0s;
-    }
-
-    .dna-loader span:nth-child(2) {
-      left: 20px;
-      top: 0;
-      animation-delay: 0.1s;
-    }
-
-    .dna-loader span:nth-child(3) {
-      left: 40px;
-      top: 0;
-      animation-delay: 0.2s;
-    }
-
-    .dna-loader span:nth-child(4) {
-      left: 60px;
-      top: 0;
-      animation-delay: 0.3s;
-    }
-
-    .dna-loader span:nth-child(5) {
-      left: 80px;
-      top: 0;
-      animation-delay: 0.4s;
-    }
-
-    .dna-loader span:nth-child(6) {
-      left: 100px;
-      top: 0;
-      animation-delay: 0.5s;
-    }
-
-    .dna-loader span:nth-child(7) {
-      left: 0;
-      top: 20px;
-      animation-delay: 0.6s;
-    }
-
-    .dna-loader span:nth-child(8) {
-      left: 20px;
-      top: 20px;
-      animation-delay: 0.7s;
-    }
-
-    .dna-loader span:nth-child(9) {
-      left: 40px;
-      top: 20px;
-      animation-delay: 0.8s;
-    }
-
-    .dna-loader span:nth-child(10) {
-      left: 60px;
-      top: 20px;
-      animation-delay: 0.9s;
-    }
-
-    @keyframes dna {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(20px);
-      }
-    }
-
-    .loader-text {
-      margin-top: 20px;
-      font-size: 1.2rem;
-      color: var(--primary);
-      font-weight: 500;
-    }
-
-    /* Pagination */
-    .pagination {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    .pagination button {
-      background-color: white;
-      border: 1px solid var(--border);
-      color: var(--dark);
-      padding: 8px 15px;
-      margin: 0 5px;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: all 0.3s;
-    }
-
-    .pagination button:hover {
-      background-color: var(--primary-light);
-      color: var(--primary-dark);
-    }
-
-    .pagination button.active {
-      background-color: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-
-    .pagination button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    /* Responsive Styles */
-    @media (max-width: 992px) {
-      .sidebar {
-        transform: translateX(-100%);
-      }
-
-      .sidebar.active {
-        transform: translateX(0);
-      }
-
-      .main-content {
-        margin-left: 0;
-      }
-
-      .hamburger {
-        display: block;
-      }
-
-      .detail-row {
-        flex-direction: column;
-      }
-
-      .detail-label {
-        width: 100%;
-        margin-bottom: 5px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .navbar {
-        padding: 15px;
-      }
-
-      .hero {
-        margin: 10px;
-        padding: 20px;
-      }
-
-      .section-table {
-        padding: 0 10px 20px;
-      }
-
-      table {
-        display: block;
-        overflow-x: auto;
-      }
-
-      .profile-header {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .profile-avatar {
-        margin-right: 0;
-        margin-bottom: 15px;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .action-btns {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-      }
-
-      .action-btn {
-        width: 100%;
-        margin-right: 0;
-      }
-    }
-  </style>
-
-  <!-- Loader -->
-  <div class="loader-overlay" id="loader">
-    <div class="dna-loader">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <div class="loader-text">Loading...</div>
-  </div>
-
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <i class='bx bx-brain'></i>
-      <h3>SerenityQ</h3>
-    </div>
-    <ul class="sidebar-menu">
-      <li><a href="admin_index.html"><i class='bx bx-bar-chart-alt-2'></i> Dashboard</a></li>
-      <li><a href="admin_psychologist.html"><i class='bx bx-user-voice'></i> Psychologists</a></li>
-      <li><a href="admin_user.html" class="active"><i class='bx bx-group'></i> Users</a></li>
-      <li><a href="#"><i class='bx bx-cog'></i> Settings</a></li>
-      <li><a href="#"><i class='bx bx-log-out'></i> Logout</a></li>
-    </ul>
-  </div>
-
-  <!-- Main Content -->
-  <div class="main-content">
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="navbar-left">
-        <button class="hamburger" id="toggleSidebar">
-          <i class='bx bx-menu' id="menuIcon"></i>
-        </button>
-        <h2>User Management</h2>
-      </div>
-      <div class="user-profile">
-        <div class="user-info">
-          <p>Admin User</p>
-          <small>Super Admin</small>
-        </div>
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile Photo" class="user-avatar">
-      </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero light-hero">
-      <h1>User Management Panel</h1>
-      <p>View, edit, or remove user profiles from the system.</p>
-      <button class="cta-btn" id="addUserBtn">+ Add New User</button>
-    </section>
-
-    <!-- User Table -->
-    <section class="section-table">
-      <h2>Registered Users</h2>
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="userTableBody">
-            <!-- Users will be loaded here -->
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Pagination -->
-      <div class="pagination" id="pagination">
-        <button id="prevPage" disabled>Previous</button>
-        <div id="pageNumbers"></div>
-        <button id="nextPage">Next</button>
-      </div>
-    </section>
-  </div>
-
-  <!-- User Details Modal -->
-  <div class="modal" id="userModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>User Details</h3>
-        <button class="close-modal" onclick="closeModal('userModal')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="profile-header">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile Photo" class="profile-avatar" id="modalUserAvatar">
-          <div class="profile-info">
-            <h3 id="modalUserName">John Doe</h3>
-            <p id="modalUserUsername">johndoe</p>
-            <p id="modalUserStatus"><span class="status active">Active</span></p>
-          </div>
-        </div>
-
-        <div class="detail-row">
-          <div class="detail-label">Email:</div>
-          <div class="detail-value" id="modalUserEmail">john@example.com</div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">First Name:</div>
-          <div class="detail-value" id="modalUserFirstName">John</div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Last Name:</div>
-          <div class="detail-value" id="modalUserLastName">Doe</div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Middle Name:</div>
-          <div class="detail-value" id="modalUserMiddleName">Michael</div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Phone:</div>
-          <div class="detail-value" id="modalUserPhone">+1 (555) 123-4567</div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Date of Birth:</div>
-          <div class="detail-value" id="modalUserDob">January 15, 1990</div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Gender:</div>
-          <div class="detail-value" id="modalUserGender">Male</div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Registration Date:</div>
-          <div class="detail-value" id="modalUserRegDate">March 10, 2023</div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="action-btn view-btn" onclick="closeModal('userModal')">Close</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Edit User Modal -->
-  <div class="modal" id="editUserModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Edit User Details</h3>
-        <button class="close-modal" onclick="closeModal('editUserModal')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="profile-header">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile Photo" class="profile-avatar" id="editUserAvatar">
-          <div class="profile-info">
-            <h3 id="editUserName">John Doe</h3>
-            <p id="editUserUsername">johndoe</p>
-          </div>
-        </div>
-
-        <div class="detail-row">
-          <div class="detail-label">First Name:</div>
-          <div class="detail-value">
-            <input type="text" id="editUserFirstNameInput" placeholder="First Name">
-          </div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Last Name:</div>
-          <div class="detail-value">
-            <input type="text" id="editUserLastNameInput" placeholder="Last Name">
-          </div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Middle Name:</div>
-          <div class="detail-value">
-            <input type="text" id="editUserMiddleNameInput" placeholder="Middle Name">
-          </div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Username:</div>
-          <div class="detail-value">
-            <input type="text" id="editUserUsernameInput" placeholder="Username">
-          </div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Phone:</div>
-          <div class="detail-value">
-            <input type="tel" id="editUserPhoneInput" placeholder="Phone Number">
-          </div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Date of Birth:</div>
-          <div class="detail-value">
-            <input type="date" id="editUserDobInput">
-          </div>
-        </div>
-        <div class="detail-row">
-          <div class="detail-label">Gender:</div>
-          <div class="detail-value">
-            <select id="editUserGenderInput">
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-              <option value="Prefer not to say">Prefer not to say</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="action-btn view-btn" onclick="closeModal('editUserModal')">Cancel</button>
-        <button class="action-btn edit-btn" onclick="saveUserChanges()">Save Changes</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Delete Confirmation Modal -->
-  <div class="modal confirmation-modal" id="deleteModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Delete User</h3>
-        <button class="close-modal" onclick="closeModal('deleteModal')">&times;</button>
-      </div>
-      <div class="confirmation-body">
-        <i class='bx bx-error-circle'></i>
-        <h3>Delete this user permanently?</h3>
-        <p>This action cannot be undone. All associated data will be removed from the system.</p>
-        <div class="modal-footer">
-          <button class="action-btn view-btn" onclick="closeModal('deleteModal')">Cancel</button>
-          <button class="action-btn delete-btn" onclick="deleteUser()">Delete Permanently</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Add User Modal -->
-  <div class="modal" id="addUserModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Add New User</h3>
-        <button class="close-modal" onclick="closeModal('addUserModal')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="addUserForm">
-          <div class="detail-row">
-            <div class="detail-label">First Name:</div>
-            <div class="detail-value">
-              <input type="text" id="addUserFirstName" placeholder="First Name" required>
-            </div>
-          </div>
-          <div class="detail-row">
-            <div class="detail-label">Last Name:</div>
-            <div class="detail-value">
-              <input type="text" id="addUserLastName" placeholder="Last Name" required>
-            </div>
-          </div>
-          <div class="detail-row">
-            <div class="detail-label">Middle Name:</div>
-            <div class="detail-value">
-              <input type="text" id="addUserMiddleName" placeholder="Middle Name">
-            </div>
-          </div>
-          <div class="detail-row">
-            <div class="detail-label">Username:</div>
-            <div class="detail-value">
-              <input type="text" id="addUserUsername" placeholder="Username" required>
-            </div>
-          </div>
-          <div class="detail-row">
-            <div class="detail-label">Email:</div>
-            <div class="detail-value">
-              <input type="email" id="addUserEmail" placeholder="Email Address" required>
-            </div>
-          </div>
-          <div class="detail-row">
-            <div class="detail-label">Password:</div>
-            <div class="detail-value">
-              <input type="password" id="addUserPassword" placeholder="Password" required>
-            </div>
-          </div>
-          <div class="detail-row">
-            <div class="detail-label">Phone:</div>
-            <div class="detail-value">
-              <input type="tel" id="addUserPhone" placeholder="Phone Number">
-            </div>
-          </div>
-          <div class="detail-row">
-            <div class="detail-label">Date of Birth:</div>
-            <div class="detail-value">
-              <input type="date" id="addUserDob">
-            </div>
-          </div>
-          <div class="detail-row">
-            <div class="detail-label">Gender:</div>
-            <div class="detail-value">
-              <select id="addUserGender">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-                <option value="Prefer not to say">Prefer not to say</option>
-              </select>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button class="action-btn view-btn" onclick="closeModal('addUserModal')">Cancel</button>
-        <button class="action-btn edit-btn" onclick="addNewUser()">Add User</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Loader timeout
-    setTimeout(() => {
-      document.getElementById('loader').style.display = 'none';
-    }, 1500);
-
-    // Toggle sidebar
-    const sidebar = document.getElementById('sidebar');
-    const toggleSidebar = document.getElementById('toggleSidebar');
-    const menuIcon = document.getElementById('menuIcon');
-
-    toggleSidebar.addEventListener('click', function() {
-      sidebar.classList.toggle('active');
-      if (sidebar.classList.contains('active')) {
-        menuIcon.classList.remove('bx-menu');
-        menuIcon.classList.add('bx-x');
-      } else {
-        menuIcon.classList.remove('bx-x');
-        menuIcon.classList.add('bx-menu');
-      }
-    });
-
-    // Modal functions
-    function openModal(modalId) {
-      document.getElementById(modalId).style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal(modalId) {
-      document.getElementById(modalId).style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }
-
-    // User data (in a real app, this would come from an API)
-    let users = [
-      {
-        id: 1,
-        firstName: "John",
-        lastName: "Doe",
-        middleName: "Michael",
-        username: "johndoe",
-        email: "john@example.com",
-        phone: "+1 (555) 123-4567",
-        dob: "1990-01-15",
-        gender: "Male",
-        status: "active",
-        regDate: "March 10, 2023",
-        avatar: "https://randomuser.me/api/portraits/men/32.jpg"
-      },
-      {
-        id: 2,
-        firstName: "Jane",
-        lastName: "Smith",
-        middleName: "Elizabeth",
-        username: "janesmith",
-        email: "jane@example.com",
-        phone: "+1 (555) 987-6543",
-        dob: "1985-05-22",
-        gender: "Female",
-        status: "active",
-        regDate: "February 15, 2023",
-        avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-      },
-      {
-        id: 3,
-        firstName: "Robert",
-        lastName: "Johnson",
-        middleName: "Lee",
-        username: "robjohn",
-        email: "robert@example.com",
-        phone: "+1 (555) 456-7890",
-        dob: "1978-11-30",
-        gender: "Male",
-        status: "active",
-        regDate: "January 5, 2023",
-        avatar: "https://randomuser.me/api/portraits/men/75.jpg"
-      },
-      {
-        id: 4,
-        firstName: "Emily",
-        lastName: "Williams",
-        middleName: "Rose",
-        username: "emilyw",
-        email: "emily@example.com",
-        phone: "+1 (555) 789-0123",
-        dob: "1992-07-18",
-        gender: "Female",
-        status: "inactive",
-        regDate: "April 20, 2023",
-        avatar: "https://randomuser.me/api/portraits/women/65.jpg"
-      },
-      {
-        id: 5,
-        firstName: "Michael",
-        lastName: "Brown",
-        middleName: "James",
-        username: "mikebrown",
-        email: "michael@example.com",
-        phone: "+1 (555) 234-5678",
-        dob: "1983-03-10",
-        gender: "Male",
-        status: "active",
-        regDate: "March 1, 2023",
-        avatar: "https://randomuser.me/api/portraits/men/22.jpg"
-      },
-      {
-        id: 6,
-        firstName: "Sarah",
-        lastName: "Davis",
-        middleName: "Anne",
-        username: "sarahd",
-        email: "sarah@example.com",
-        phone: "+1 (555) 345-6789",
-        dob: "1995-09-25",
-        gender: "Female",
-        status: "active",
-        regDate: "February 28, 2023",
-        avatar: "https://randomuser.me/api/portraits/women/33.jpg"
-      },
-      {
-        id: 7,
-        firstName: "David",
-        lastName: "Miller",
-        middleName: "Paul",
-        username: "davidm",
-        email: "david@example.com",
-        phone: "+1 (555) 456-7890",
-        dob: "1980-12-05",
-        gender: "Male",
-        status: "inactive",
-        regDate: "January 15, 2023",
-        avatar: "https://randomuser.me/api/portraits/men/45.jpg"
-      }
-    ];
-
-    // Pagination variables
-    let currentPage = 1;
-    const usersPerPage = 5;
-
-    // Current user ID for actions
-    let currentUserId = null;
-
-    // Format date to display
-    function formatDate(dateString) {
-      if (!dateString) return "Not specified";
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      return new Date(dateString).toLocaleDateString('en-US', options);
-    }
-
-    // Display users in table with pagination
-    function displayUsers(page) {
-      const tableBody = document.getElementById('userTableBody');
-      tableBody.innerHTML = '';
-
-      const startIndex = (page - 1) * usersPerPage;
-      const endIndex = startIndex + usersPerPage;
-      const paginatedUsers = users.slice(startIndex, endIndex);
-
-      paginatedUsers.forEach(user => {
-        const row = document.createElement('tr');
-        row.setAttribute('data-id', user.id);
-        row.innerHTML = `
-          <td>${user.firstName} ${user.lastName}</td>
-          <td>${user.username}</td>
-          <td>${user.email}</td>
-          <td><span class="status ${user.status}">${user.status === 'active' ? 'Active' : 'Inactive'}</span></td>
-          <td>
-            <div class="action-btns">
-              <button class="action-btn view-btn" onclick="viewUserDetails(${user.id})">View</button>
-              <button class="action-btn edit-btn" onclick="editUserDetails(${user.id})">Edit</button>
-              <button class="action-btn delete-btn" onclick="showDeleteModal(${user.id})">Delete</button>
-            </div>
-          </td>
-        `;
-        tableBody.appendChild(row);
-      });
-
-      // Update pagination controls
-      updatePaginationControls();
-    }
-
-    // Update pagination controls
-    function updatePaginationControls() {
-      const totalPages = Math.ceil(users.length / usersPerPage);
-      const prevBtn = document.getElementById('prevPage');
-      const nextBtn = document.getElementById('nextPage');
-      const pageNumbers = document.getElementById('pageNumbers');
-
-      // Update previous button
-      prevBtn.disabled = currentPage === 1;
-
-      // Update next button
-      nextBtn.disabled = currentPage === totalPages;
-
-      // Update page numbers
-      pageNumbers.innerHTML = '';
-      for (let i = 1; i <= totalPages; i++) {
-        const pageBtn = document.createElement('button');
-        pageBtn.textContent = i;
-        if (i === currentPage) {
-          pageBtn.classList.add('active');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychologist Register | SerenityQ</title>
+    <style>
+        :root {
+            --primary: #5D5FEF;
+            --primary-light: #8B8DF2;
+            --secondary: #FF7E5F;
+            --accent: #FFD166;
+            --light: #F7F9FC;
+            --dark: #2B2D42;
+            --gray: #8D99AE;
+            --success: #4CAF50;
+            --error: #F44336;
+            --modal-bg: rgba(0, 0, 0, 0.5);
         }
-        pageBtn.addEventListener('click', () => {
-          currentPage = i;
-          displayUsers(currentPage);
-        });
-        pageNumbers.appendChild(pageBtn);
-      }
-    }
 
-    // View user details
-    function viewUserDetails(id) {
-      const user = users.find(u => u.id === id);
-      if (user) {
-        document.getElementById('modalUserName').textContent = `${user.firstName} ${user.lastName}`;
-        document.getElementById('modalUserUsername').textContent = user.username;
-        document.getElementById('modalUserEmail').textContent = user.email;
-        document.getElementById('modalUserFirstName').textContent = user.firstName;
-        document.getElementById('modalUserLastName').textContent = user.lastName;
-        document.getElementById('modalUserMiddleName').textContent = user.middleName || "Not specified";
-        document.getElementById('modalUserPhone').textContent = user.phone || "Not specified";
-        document.getElementById('modalUserDob').textContent = formatDate(user.dob);
-        document.getElementById('modalUserGender').textContent = user.gender;
-        document.getElementById('modalUserRegDate').textContent = user.regDate;
-        document.getElementById('modalUserAvatar').src = user.avatar;
-        
-        // Update status badge
-        const statusElement = document.getElementById('modalUserStatus');
-        statusElement.innerHTML = `<span class="status ${user.status}">${user.status === 'active' ? 'Active' : 'Inactive'}</span>`;
-        
-        openModal('userModal');
-      }
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    // Edit user details
-    function editUserDetails(id) {
-      const user = users.find(u => u.id === id);
-      if (user) {
-        currentUserId = id;
-        document.getElementById('editUserName').textContent = `${user.firstName} ${user.lastName}`;
-        document.getElementById('editUserUsername').textContent = user.username;
-        document.getElementById('editUserAvatar').src = user.avatar;
-        
-        // Fill form fields
-        document.getElementById('editUserFirstNameInput').value = user.firstName;
-        document.getElementById('editUserLastNameInput').value = user.lastName;
-        document.getElementById('editUserMiddleNameInput').value = user.middleName || '';
-        document.getElementById('editUserUsernameInput').value = user.username;
-        document.getElementById('editUserPhoneInput').value = user.phone || '';
-        document.getElementById('editUserDobInput').value = user.dob || '';
-        document.getElementById('editUserGenderInput').value = user.gender;
-        
-        openModal('editUserModal');
-      }
-    }
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
 
-    // Save user changes
-    function saveUserChanges() {
-      const userIndex = users.findIndex(u => u.id === currentUserId);
-      if (userIndex !== -1) {
-        users[userIndex] = {
-          ...users[userIndex],
-          firstName: document.getElementById('editUserFirstNameInput').value,
-          lastName: document.getElementById('editUserLastNameInput').value,
-          middleName: document.getElementById('editUserMiddleNameInput').value || null,
-          username: document.getElementById('editUserUsernameInput').value,
-          phone: document.getElementById('editUserPhoneInput').value || null,
-          dob: document.getElementById('editUserDobInput').value || null,
-          gender: document.getElementById('editUserGenderInput').value
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .logo i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        .registration-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .registration-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .registration-header h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .registration-header p {
+            color: var(--gray);
+            max-width: 600px;
+        }
+
+        .registration-steps {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding: 0 30px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--gray);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            z-index: 2;
+        }
+
+        .step.active .step-number {
+            background-color: var(--primary);
+        }
+
+        .step.completed .step-number {
+            background-color: var(--success);
+        }
+
+        .step-title {
+            color: var(--gray);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .step.active .step-title {
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .step.completed .step-title {
+            color: var(--dark);
+        }
+
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: calc(50% + 20px);
+            width: 60px;
+            height: 2px;
+            background-color: var(--gray);
+            z-index: 1;
+        }
+
+        .step.completed:not(:last-child)::after {
+            background-color: var(--success);
+        }
+
+        .registration-form {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(93, 95, 239, 0.1);
+        }
+
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload-btn {
+            border: 1px dashed var(--gray);
+            border-radius: 6px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .file-upload-btn:hover {
+            border-color: var(--primary);
+            background-color: rgba(93, 95, 239, 0.05);
+        }
+
+        .file-upload-btn i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .file-upload-btn p {
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .file-upload-btn span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .upload-preview {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 6px;
+        }
+
+        .upload-preview img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+        .upload-preview-info {
+            flex: 1;
+        }
+
+        .upload-preview-info p {
+            font-size: 0.9rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .upload-preview-info small {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .remove-upload {
+            color: var(--error);
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-left: 15px;
+        }
+
+        .specialty-checkboxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .years-slider {
+            margin-top: 15px;
+        }
+
+        .slider-container {
+            padding: 0 10px;
+        }
+
+        .slider-value {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .otp-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .otp-input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .otp-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(93, 95, 239, 0.2);
+        }
+
+        .resend-otp {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .resend-otp a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .resend-otp a:hover {
+            text-decoration: underline;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(93, 95, 239, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(93, 95, 239, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .btn-disabled {
+            background-color: var(--gray);
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .btn-disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .success-message i {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        .success-message h2 {
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .registration-container {
+                padding: 30px 20px;
+            }
+
+            .registration-steps {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .step {
+                padding: 0 15px;
+            }
+
+            .step:not(:last-child)::after {
+                display: none;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .specialty-checkboxes {
+                grid-template-columns: 1fr;
+            }
+
+            .otp-inputs {
+                gap: 5px;
+            }
+
+            .otp-input {
+                width: 40px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .registration-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+                gap: 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-brain"></i>
+                SerenityQ
+            </a>
+            <div>
+                Already have an account? <a href="pyschologistLogin.html" style="color: var(--primary); font-weight: 600;">Sign In</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="registration-container">
+            <div class="registration-header">
+                <h1>Psychologist Registration</h1>
+                <p>Join our network of mental health professionals and help make a difference in people's lives</p>
+            </div>
+
+            <div class="registration-steps">
+                <div class="step active" id="step1-indicator">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Account Info</div>
+                </div>
+                <div class="step" id="step2-indicator">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Professional Details</div>
+                </div>
+                <div class="step" id="step3-indicator">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Verification</div>
+                </div>
+            </div>
+
+            <form id="registrationForm" class="registration-form">
+                <!-- Step 1: Account Information -->
+                <div class="form-step active" id="step1">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" required minlength="8">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" disabled>Back</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(1)">Continue</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Professional Details -->
+                <div class="form-step" id="step2">
+                    <div class="form-group">
+                        <label for="licenseNumber">Professional License Number</label>
+                        <input type="text" id="licenseNumber" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="licenseProof">Upload License Proof</label>
+                        <div class="file-upload">
+                            <label class="file-upload-btn">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drag & drop your file here or click to browse</p>
+                                <span>Upload PDF, JPG or PNG (Max 5MB)</span>
+                                <input type="file" id="licenseProof" accept=".pdf,.jpg,.jpeg,.png" required>
+                            </label>
+                        </div>
+                        <div id="licensePreview" class="upload-preview" style="display: none;">
+                            <img id="licensePreviewImg" src="#" alt="License Preview">
+                            <div class="upload-preview-info">
+                                <p id="licenseFileName"></p>
+                                <small id="licenseFileSize"></small>
+                            </div>
+                            <i class="fas fa-times remove-upload" onclick="removeUpload('licenseProof')"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="idProof">Upload Government ID for Verification</label>
+                        <div class="file-upload">
+                            <label class="file-upload-btn">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drag & drop your file here or click to browse</p>
+                                <span>Upload PDF, JPG or PNG (Max 5MB)</span>
+                                <input type="file" id="idProof" accept=".pdf,.jpg,.jpeg,.png" required>
+                            </label>
+                        </div>
+                        <div id="idPreview" class="upload-preview" style="display: none;">
+                            <img id="idPreviewImg" src="#" alt="ID Preview">
+                            <div class="upload-preview-info">
+                                <p id="idFileName"></p>
+                                <small id="idFileSize"></small>
+                            </div>
+                            <i class="fas fa-times remove-upload" onclick="removeUpload('idProof')"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Primary Specialty</label>
+                        <select id="primarySpecialty" required>
+                            <option value="">Select your primary specialty</option>
+                            <option value="clinical">Clinical Psychologist</option>
+                            <option value="counseling">Counseling Psychologist</option>
+                            <option value="school">School Psychologist</option>
+                            <option value="health">Health Psychologist</option>
+                            <option value="child">Child/Adolescent Psychologist</option>
+                            <option value="neuro">Neuropsychologist</option>
+                            <option value="forensic">Forensic Psychologist</option>
+                            <option value="io">Industrial-Organizational Psychologist</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Additional Specialties (Select all that apply)</label>
+                        <div class="specialty-checkboxes">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="anxiety" name="specialties" value="anxiety">
+                                <label for="anxiety">Anxiety Disorders</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="depression" name="specialties" value="depression">
+                                <label for="depression">Depression</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="trauma" name="specialties" value="trauma">
+                                <label for="trauma">Trauma/PTSD</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="relationships" name="specialties" value="relationships">
+                                <label for="relationships">Relationship Issues</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="stress" name="specialties" value="stress">
+                                <label for="stress">Stress Management</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="adhd" name="specialties" value="adhd">
+                                <label for="adhd">ADHD</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="autism" name="specialties" value="autism">
+                                <label for="autism">Autism Spectrum</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="eating" name="specialties" value="eating">
+                                <label for="eating">Eating Disorders</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="addiction" name="specialties" value="addiction">
+                                <label for="addiction">Addiction</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="ocd" name="specialties" value="ocd">
+                                <label for="ocd">OCD</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="bipolar" name="specialties" value="bipolar">
+                                <label for="bipolar">Bipolar Disorder</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="personality" name="specialties" value="personality">
+                                <label for="personality">Personality Disorders</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yearsExperience">Years of Experience</label>
+                        <div class="years-slider">
+                            <div class="slider-container">
+                                <input type="range" id="yearsExperience" min="0" max="50" value="5" class="slider">
+                                <div class="slider-value"><span id="yearsValue">5</span> years</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio">Professional Bio</label>
+                        <textarea id="bio" rows="5" required></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Back</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(2)">Continue</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Verification -->
+                <div class="form-step" id="step3">
+                    <div class="form-group">
+                        <h3 style="text-align: center; margin-bottom: 20px;">Email Verification</h3>
+                        <p style="text-align: center; color: var(--gray); margin-bottom: 30px;">
+                            We've sent a 6-digit verification code to <strong id="emailToVerify">user@example.com</strong>.
+                            Please enter it below to verify your email address.
+                        </p>
+                        
+                        <div class="otp-inputs">
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                        </div>
+                        
+                        <div class="resend-otp">
+                            Didn't receive the code? <a href="#" onclick="resendOTP()">Resend</a>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Back</button>
+                        <button type="button" class="btn btn-primary" onclick="verifyAccount()">Verify & Complete Registration</button>
+                    </div>
+                </div>
+
+                <!-- Success Message (hidden initially) -->
+                <div class="form-step" id="successStep">
+                    <div class="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <h2>Registration Successful!</h2>
+                        <p>Thank you for joining SerenityQ as a mental health professional. Our team will review your application and verify your credentials within 2-3 business days. You'll receive an email once your account is approved.</p>
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='pyschologistLogin.html'">Go to Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Current step tracking
+        let currentStep = 1;
+        const totalSteps = 3;
+        
+        // Form data object to store all inputs
+        const formData = {
+            account: {},
+            professional: {},
+            verification: {}
         };
-        
-        displayUsers(currentPage);
-        closeModal('editUserModal');
-        alert('User details updated successfully!');
-      }
-    }
 
-    // Show delete confirmation modal
-    function showDeleteModal(id) {
-      currentUserId = id;
-      openModal('deleteModal');
-    }
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up file upload previews
+            setupFileUpload('licenseProof', 'licensePreview', 'licensePreviewImg', 'licenseFileName', 'licenseFileSize');
+            setupFileUpload('idProof', 'idPreview', 'idPreviewImg', 'idFileName', 'idFileSize');
+            
+            // Set up years of experience slider
+            const yearsSlider = document.getElementById('yearsExperience');
+            const yearsValue = document.getElementById('yearsValue');
+            
+            yearsSlider.addEventListener('input', function() {
+                yearsValue.textContent = this.value;
+            });
+            
+            // Set up OTP input navigation
+            const otpInputs = document.querySelectorAll('.otp-input');
+            otpInputs.forEach((input, index) => {
+                input.addEventListener('input', function() {
+                    if (this.value.length === 1 && index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                });
+                
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                });
+            });
+        });
 
-    // Delete user
-    function deleteUser() {
-      users = users.filter(u => u.id !== currentUserId);
-      displayUsers(currentPage);
-      closeModal('deleteModal');
-      alert('User deleted successfully!');
-    }
+        // File upload setup
+        function setupFileUpload(inputId, previewId, previewImgId, fileNameId, fileSizeId) {
+            const input = document.getElementById(inputId);
+            const preview = document.getElementById(previewId);
+            const previewImg = document.getElementById(previewImgId);
+            const fileName = document.getElementById(fileNameId);
+            const fileSize = document.getElementById(fileSizeId);
+            
+            input.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    const file = this.files[0];
+                    
+                    // Display file info
+                    fileName.textContent = file.name;
+                    fileSize.textContent = formatFileSize(file.size);
+                    
+                    // Show preview for images
+                    if (file.type.match('image.*')) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            previewImg.src = e.target.result;
+                            preview.style.display = 'flex';
+                        }
+                        reader.readAsDataURL(file);
+                    } else {
+                        // For PDFs or other non-image files
+                        previewImg.src = 'https://cdn-icons-png.flaticon.com/512/337/337946.png'; // Generic document icon
+                        preview.style.display = 'flex';
+                    }
+                }
+            });
+        }
 
-    // Add new user
-    function addNewUser() {
-      const form = document.getElementById('addUserForm');
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-      
-      const newUser = {
-        id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
-        firstName: document.getElementById('addUserFirstName').value,
-        lastName: document.getElementById('addUserLastName').value,
-        middleName: document.getElementById('addUserMiddleName').value || null,
-        username: document.getElementById('addUserUsername').value,
-        email: document.getElementById('addUserEmail').value,
-        phone: document.getElementById('addUserPhone').value || null,
-        dob: document.getElementById('addUserDob').value || null,
-        gender: document.getElementById('addUserGender').value,
-        status: "active",
-        regDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
-        avatar: `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 100)}.jpg`
-      };
-      
-      users.unshift(newUser);
-      displayUsers(1); // Go to first page to show new user
-      closeModal('addUserModal');
-      alert('User added successfully!');
-      
-      // Reset form
-      form.reset();
-    }
+        // Remove uploaded file
+        function removeUpload(inputId) {
+            const input = document.getElementById(inputId);
+            const previewId = inputId === 'licenseProof' ? 'licensePreview' : 'idPreview';
+            const preview = document.getElementById(previewId);
+            
+            input.value = '';
+            preview.style.display = 'none';
+        }
 
-    // Event listeners for pagination
-    document.getElementById('prevPage').addEventListener('click', () => {
-      if (currentPage > 1) {
-        currentPage--;
-        displayUsers(currentPage);
-      }
-    });
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
 
-    document.getElementById('nextPage').addEventListener('click', () => {
-      const totalPages = Math.ceil(users.length / usersPerPage);
-      if (currentPage < totalPages) {
-        currentPage++;
-        displayUsers(currentPage);
-      }
-    });
+        // Navigation between steps
+        function nextStep(step) {
+            // Validate current step before proceeding
+            if (!validateStep(step)) return;
+            
+            // Save current step data
+            saveStepData(step);
+            
+            // Hide current step
+            document.getElementById(`step${step}`).classList.remove('active');
+            document.getElementById(`step${step}-indicator`).classList.remove('active');
+            
+            // Show next step
+            currentStep = step + 1;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.getElementById(`step${currentStep}-indicator`).classList.add('active');
+            
+            // For verification step, show the email being verified
+            if (currentStep === 3) {
+                document.getElementById('emailToVerify').textContent = formData.account.email;
+                // In a real app, this would send an actual OTP to the email
+            }
+            
+            // Update back button state
+            updateBackButton();
+        }
 
-    // Event listener for add user button
-    document.getElementById('addUserBtn').addEventListener('click', () => {
-      openModal('addUserModal');
-    });
+        function prevStep(step) {
+            // Hide current step
+            document.getElementById(`step${step}`).classList.remove('active');
+            document.getElementById(`step${step}-indicator`).classList.remove('active');
+            
+            // Show previous step
+            currentStep = step - 1;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.getElementById(`step${currentStep}-indicator`).classList.add('active');
+            
+            // Update back button state
+            updateBackButton();
+        }
 
-    // Initialize the page
-    document.addEventListener('DOMContentLoaded', () => {
-      displayUsers(currentPage);
-    });
-  </script>
+        function updateBackButton() {
+            const backButtons = document.querySelectorAll('.btn-secondary');
+            backButtons.forEach(button => {
+                if (currentStep === 1) {
+                    button.disabled = true;
+                    button.classList.add('btn-disabled');
+                } else {
+                    button.disabled = false;
+                    button.classList.remove('btn-disabled');
+                }
+            });
+        }
+
+        // Validate current step
+        function validateStep(step) {
+            if (step === 1) {
+                // Validate account info
+                const firstName = document.getElementById('firstName').value.trim();
+                const lastName = document.getElementById('lastName').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                    alert('Please fill in all required fields');
+                    return false;
+                }
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match');
+                    return false;
+                }
+                
+                if (password.length < 8) {
+                    alert('Password must be at least 8 characters long');
+                    return false;
+                }
+                
+                // Simple email validation
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    alert('Please enter a valid email address');
+                    return false;
+                }
+                
+                return true;
+            } else if (step === 2) {
+                // Validate professional details
+                const licenseNumber = document.getElementById('licenseNumber').value.trim();
+                const licenseProof = document.getElementById('licenseProof').files[0];
+                const idProof = document.getElementById('idProof').files[0];
+                const primarySpecialty = document.getElementById('primarySpecialty').value;
+                const bio = document.getElementById('bio').value.trim();
+                
+                if (!licenseNumber || !licenseProof || !idProof || !primarySpecialty || !bio) {
+                    alert('Please fill in all required fields and upload required documents');
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            return true;
+        }
+
+        // Save data from current step
+        function saveStepData(step) {
+            if (step === 1) {
+                formData.account = {
+                    firstName: document.getElementById('firstName').value.trim(),
+                    lastName: document.getElementById('lastName').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    password: document.getElementById('password').value
+                };
+            } else if (step === 2) {
+                const specialties = [];
+                document.querySelectorAll('input[name="specialties"]:checked').forEach(checkbox => {
+                    specialties.push(checkbox.value);
+                });
+                
+                formData.professional = {
+                    licenseNumber: document.getElementById('licenseNumber').value.trim(),
+                    licenseProof: document.getElementById('licenseProof').files[0],
+                    idProof: document.getElementById('idProof').files[0],
+                    primarySpecialty: document.getElementById('primarySpecialty').value,
+                    specialties: specialties,
+                    yearsExperience: document.getElementById('yearsExperience').value,
+                    bio: document.getElementById('bio').value.trim()
+                };
+            }
+        }
+
+        // Resend OTP
+        function resendOTP() {
+            alert('A new verification code has been sent to your email. (Demo purposes only)');
+            return false;
+        }
+
+        // Verify account and complete registration
+        function verifyAccount() {
+            // In a real app, this would verify the OTP against what was sent to the user's email
+            const otpInputs = document.querySelectorAll('.otp-input');
+            let otp = '';
+            otpInputs.forEach(input => {
+                otp += input.value;
+            });
+            
+            if (otp.length !== 6) {
+                alert('Please enter the complete 6-digit verification code');
+                return;
+            }
+            
+            // For demo purposes, any 6-digit code will work
+            if (/^\d{6}$/.test(otp)) {
+                // Hide verification step
+                document.getElementById('step3').classList.remove('active');
+                document.getElementById('step3-indicator').classList.remove('active');
+                
+                // Show success message
+                document.getElementById('successStep').classList.add('active');
+                document.getElementById('step3-indicator').classList.add('completed');
+                
+                // In a real app, you would submit the form data to your backend here
+                console.log('Registration data:', formData);
+            } else {
+                alert('Please enter a valid 6-digit verification code');
+            }
+        }
+    </script>
 </body>
 </html>
-
-
-
-
