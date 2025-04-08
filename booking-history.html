@@ -11,42 +11,41 @@
     <link rel="stylesheet" href="css/booking-history.css">
 </head>
 <body>
-
-
-        <!-- Header with Navigation -->
-        <header class="header">
-            <a href="#" class="logo">
-                <i class="fas fa-brain"></i>
-                SerenityQ
-            </a>
+    <!-- Header with Navigation -->
+    <header class="header">
+        <a href="#" class="logo">
+            <i class="fas fa-brain"></i>
+            SerenityQ
+        </a>
+        
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <nav class="navbar">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="ai.html" class="nav-link"><i class="fas fa-robot"></i> SerenityQ AI</a></li>
+                <li><a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> Statistics</a></li>
+                <li><a href="appointment.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+                <li><a href="therapist.html" class="nav-link"><i class="fas fa-user-md"></i> Therapists</a></li>
+                <li><a href="booking-history.html" class="nav-link active"><i class="fas fa-history"></i> Booking History</a></li>
+                <li><a href="sessions.html" class="nav-link"><i class="fas fa-clock"></i> Sessions</a></li>
+            </ul>
             
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            
-            <nav class="navbar">
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
-                    <li><a href="appointment.html" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
-                    <li><a href="therapist.html" class="nav-link"><i class="fas fa-user-md"></i> Therapists</a></li>
-                    <li><a href="booking-history.html" class="nav-link active"><i class="fas fa-history"></i> Booking History</a></li>
-                    <li><a href="sessions.html" class="nav-link active"><i class="fas fa-clock"></i> Sessions</a></li>
-                </ul>
-                
-                <div class="profile">
-                    <span class="profile-name">Sarah</span>
-                    <img src="https://randomuser.me/api/portraits/women/45.jpg" class="profile-img" alt="Profile">
-                    <div class="dropdown-menu">
-                        <a href="user-profile.html" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
-                        <a href="notifications.html" class="dropdown-item"><i class="fas fa-bell"></i> Notifications</a>
-                        <div class="divider"></div>
-                        <a href="#" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                    </div>
+            <div class="profile">
+                <span class="profile-name">Sarah</span>
+                <img src="https://randomuser.me/api/portraits/women/45.jpg" class="profile-img" alt="Profile">
+                <div class="dropdown-menu">
+                    <a href="user-profile.html" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
+                    <a href="notifications.html" class="dropdown-item"><i class="fas fa-bell"></i> Notifications</a>
+                    <div class="divider"></div>
+                    <a href="#" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
-            </nav>
-        </header>
+            </div>
+        </nav>
+    </header>
 
     <div class="container">
         <h1 class="page-title">Your Booking History</h1>
@@ -59,24 +58,16 @@
         </div>
 
         <div class="view-toggle">
-            <button class="view-btn active" data-view="cards">
-                <i class="fas fa-th-large"></i> Cards
-            </button>
-            <button class="view-btn" data-view="swiper">
-                <i class="fas fa-mobile-alt"></i> Swiper
+            <button class="view-btn active" data-view="swiper">
+                <i class="fas fa-mobile-alt"></i> Swiper View
             </button>
             <button class="view-btn" data-view="table">
-                <i class="fas fa-table"></i> Table
+                <i class="fas fa-table"></i> Table View
             </button>
         </div>
         
-        <!-- Card View -->
-        <div class="booking-container" id="bookingContainer">
-            <!-- Bookings will be dynamically inserted here -->
-        </div>
-
         <!-- Swiper View -->
-        <div class="swiper-view" id="swiperView">
+        <div class="swiper-view active" id="swiperView">
             <div class="swiper">
                 <div class="swiper-wrapper" id="swiperWrapper">
                     <!-- Swiper slides will be inserted here -->
@@ -169,9 +160,8 @@
         </div>
     </div>
 
-
-     <!-- Chatbot Interface -->
-     <button class="chatbot-toggle" id="chatbotToggle">
+    <!-- Chatbot Interface -->
+    <button class="chatbot-toggle" id="chatbotToggle">
         <i class="fas fa-comment-dots"></i>
     </button>
 
@@ -191,19 +181,11 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="js/userdashboard.js"></script>
+    <script src="js/activeLink.js"></script>
     <script>
-        // Sample booking data
+        // Sample booking data - ordered by upcoming first, then cancelled, then completed
         const bookings = [
-            {
-                id: 1,
-                title: "Anxiety Management",
-                psychologist: "Dr. Sarah Johnson",
-                date: "2023-06-15",
-                time: "14:30",
-                duration: "45 mins",
-                status: "completed",
-                notes: "Initial consultation for anxiety management"
-            },
             {
                 id: 2,
                 title: "Cognitive Behavioral Therapy",
@@ -213,26 +195,6 @@
                 duration: "60 mins",
                 status: "upcoming",
                 notes: "Follow-up session"
-            },
-            {
-                id: 3,
-                title: "Stress Reduction",
-                psychologist: "Dr. Emily Wilson",
-                date: "2023-05-10",
-                time: "16:15",
-                duration: "45 mins",
-                status: "completed",
-                notes: "Stress management techniques"
-            },
-            {
-                id: 4,
-                title: "Depression Counseling",
-                psychologist: "Dr. Robert Garcia",
-                date: "2023-04-28",
-                time: "11:30",
-                duration: "60 mins",
-                status: "cancelled",
-                notes: "Cancelled due to conflict"
             },
             {
                 id: 5,
@@ -253,11 +215,40 @@
                 duration: "60 mins",
                 status: "upcoming",
                 notes: "Couples therapy session"
+            },
+            {
+                id: 4,
+                title: "Depression Counseling",
+                psychologist: "Dr. Robert Garcia",
+                date: "2023-04-28",
+                time: "11:30",
+                duration: "60 mins",
+                status: "cancelled",
+                notes: "Cancelled due to conflict"
+            },
+            {
+                id: 1,
+                title: "Anxiety Management",
+                psychologist: "Dr. Sarah Johnson",
+                date: "2023-06-15",
+                time: "14:30",
+                duration: "45 mins",
+                status: "completed",
+                notes: "Initial consultation for anxiety management"
+            },
+            {
+                id: 3,
+                title: "Stress Reduction",
+                psychologist: "Dr. Emily Wilson",
+                date: "2023-05-10",
+                time: "16:15",
+                duration: "45 mins",
+                status: "completed",
+                notes: "Stress management techniques"
             }
         ];
         
         // DOM elements
-        const bookingContainer = document.getElementById('bookingContainer');
         const swiperView = document.getElementById('swiperView');
         const swiperWrapper = document.getElementById('swiperWrapper');
         const tableContainer = document.getElementById('tableContainer');
@@ -278,7 +269,7 @@
         // Current booking being interacted with
         let currentBookingId = null;
         let currentFilter = 'all';
-        let currentView = 'cards';
+        let currentView = 'swiper';
         let swiper = null;
         
         // Initialize the page
@@ -321,26 +312,11 @@
             });
         }
         
-        // Render all views (cards, swiper, table)
+        // Render all views (swiper, table)
         function renderAllViews(bookingsToRender) {
-            renderCards(bookingsToRender);
             renderSwiper(bookingsToRender);
             renderTable(bookingsToRender);
             updateViewVisibility();
-        }
-        
-        // Render card view
-        function renderCards(bookingsToRender) {
-            bookingContainer.innerHTML = '';
-            
-            if (bookingsToRender.length === 0) {
-                bookingContainer.innerHTML = createEmptyState();
-                return;
-            }
-            
-            bookingsToRender.forEach(booking => {
-                bookingContainer.appendChild(createBookingCard(booking));
-            });
         }
         
         // Render swiper view
@@ -368,7 +344,7 @@
             }
         }
         
-        // Render table view
+        // Render table view (max 5 items)
         function renderTable(bookingsToRender) {
             tableBody.innerHTML = '';
             
@@ -377,12 +353,15 @@
                 return;
             }
             
-            bookingsToRender.forEach(booking => {
+            // Limit to 5 items in table view
+            const limitedBookings = bookingsToRender.slice(0, 5);
+            
+            limitedBookings.forEach(booking => {
                 tableBody.appendChild(createTableRow(booking));
             });
         }
         
-        // Create booking card element
+        // Create booking card element for swiper
         function createBookingCard(booking) {
             const bookingCard = document.createElement('div');
             bookingCard.className = `booking-card ${booking.status}`;
@@ -520,7 +499,6 @@
         
         // Update view visibility based on current view
         function updateViewVisibility() {
-            bookingContainer.style.display = currentView === 'cards' ? 'grid' : 'none';
             swiperView.style.display = currentView === 'swiper' ? 'block' : 'none';
             tableContainer.style.display = currentView === 'table' ? 'block' : 'none';
         }
@@ -672,7 +650,5 @@
         // Initialize the page
         document.addEventListener('DOMContentLoaded', init);
     </script>
-    <script src="js/userdashboard.js"></script>
-    <script src="js/activeLink.js"></script>
 </body>
 </html>
